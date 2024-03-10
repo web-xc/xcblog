@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hexo Butterfly主题配置 | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="Hexo Butterfly主题相关配置关于部署Hexo的主题butterfly后，一些相关的配置 其实关于hexo主题的基础网上都挺详细，详情可见作者的教程 准备：将 butterfly&amp;#x2F;_config.yml 文件复制，重命名为 _config.butterfly.yml 放在hexo根目录下，"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Hexo Butterfly主题配置</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://npm.elemecdn.com/webxc@1.0.0/cover/cover6.jpg" alt="Hexo Butterfly主题配置"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/Hexo/">Hexo</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/"><span class="tags-name tags-punctuation">Hexo</span></a></div></div></div></div><h1 class="post-title">Hexo Butterfly主题配置</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><h3 id="Hexo-Butterfly主题相关配置"><a href="#Hexo-Butterfly主题相关配置" class="headerlink" title="Hexo Butterfly主题相关配置"></a>Hexo Butterfly主题相关配置</h3><p>关于部署Hexo的主题butterfly后，一些相关的配置</p>
+<p>其实关于hexo主题的基础网上都挺详细，详情可见<a href="https://link.zhihu.com/?target=https://butterfly.js.org/">作者的教程</a></p>
+<p>准备：将 <em>butterfly/_config.yml</em> 文件复制，重命名为 <em>_config.butterfly.yml</em> 放在hexo根目录下，在这个文件里做修改。</p>
+<h4 id="首页导航栏"><a href="#首页导航栏" class="headerlink" title="首页导航栏"></a>首页导航栏</h4><p>在 <em>_config.butterfly.yml</em> 下找到 menu ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">   首页: / || fas fa-home</span><br><span class="line">   归档: /archives/ || fas fa-archive</span><br><span class="line">   标签: /tags/ || fas fa-tags</span><br><span class="line">   分类: /categories/ || fas fa-folder-open</span><br><span class="line">   #菜单||fas fa-list:</span><br><span class="line">     #音乐: /music/ || fas fa-music</span><br><span class="line">     #电影: /movies/ || fas fa-video</span><br><span class="line">   友链: /link/ || fas fa-link</span><br><span class="line">   #关于: /about/ || fas fa-heart</span><br></pre></td></tr></table></figure>
+
+<p>可在自己不需要的项目前加 # 来使其不出现在导航栏中。</p>
+<p><img data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/posts/butterfly%20(2).png" alt="img"></p>
+<h2 id="首页的副标题"><a href="#首页的副标题" class="headerlink" title="首页的副标题"></a>首页的副标题</h2><p>在 <em>_config.butterfly.yml</em> 下找到 subtitle ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">subtitle:</span><br><span class="line">  enable: true</span><br><span class="line">  # Typewriter Effect (打字效果)</span><br><span class="line">  effect: false</span><br><span class="line">  # loop (循环打字)</span><br><span class="line">  loop: false</span><br><span class="line">  # source 调用第三方服務</span><br><span class="line">  # source: false 关闭调用</span><br><span class="line">  # source: 1  调用一言网的一句話（简体） https://hitokoto.cn/</span><br><span class="line">  # source: 2  调用一句网（简体） http://yijuzhan.com/</span><br><span class="line">  # source: 3  调用今日詩詞（简体） https://www.jinrishici.com/</span><br><span class="line">  # subtitle 会先显示 source , 再显示 sub 的內容</span><br><span class="line">  source: false</span><br><span class="line">  # 如果关闭打字效果，subtitle 只会显示 sub 的第一行文字</span><br><span class="line">  sub:</span><br><span class="line">    - 多看书，多看报；少玩电脑，多睡觉</span><br></pre></td></tr></table></figure>
+
+<p>我把打字效果和循环效果都关了，在sub后添加自己的副标题，注意要加 - 且 - 后面要有空格，否则只能显示一个字。当然也可添加多个内容，但好像要打开打字效果，效果见封面。</p>
+<h2 id="首页图片"><a href="#首页图片" class="headerlink" title="首页图片"></a>首页图片</h2><p>在 <em>_config.butterfly.yml</em> 下找到 index_img ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># The banner image of home page</span><br><span class="line">index_img: /img/img.jpg</span><br></pre></td></tr></table></figure>
+
+<p>在主题文件夹 <em>/source/img</em> 文件夹下添加 img.jpg</p>
+<p>文件夹里还有头像、网页图标等文件，都可更改（网页图标更改部署后一直无法成功，具体原因也不是很清楚···）</p>
+<p>图片最好不要太大，不然可能导致加载太慢，可以用以下网站进行压缩<br><a href="https://link.zhihu.com/?target=http://niaoapi.com/">http://niaoapi.com/</a></p>
+<p>可在 <em>_config.butterfly.yml</em> 里打开 加载动画 ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Loading Animation (加载动画)</span><br><span class="line">preloader: true</span><br></pre></td></tr></table></figure>
+
+<p>缓解载入时间太久的尴尬。</p>
+<p>设置主页图片显示大小：</p>
+<p>在 <em>_config.butterfly.yml</em> 下找到 index_top_img_height ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># The position of site info, eg: 300px/300em/300rem/10% (主页标题距离顶部距离)</span><br><span class="line">index_site_info_top:</span><br><span class="line"># The height of top_img, eg: 300px/300em/300rem (主页top_img高度)</span><br><span class="line">index_top_img_height: </span><br></pre></td></tr></table></figure>
+
+<p>在 index_top_img_height ：后面加上300px、400px都可，不加就是默认全屏显示。</p>
+<h2 id="侧边栏"><a href="#侧边栏" class="headerlink" title="侧边栏"></a>侧边栏</h2><p>在 <em>_config.butterfly.yml</em> 下找到 aside ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">aside:</span><br><span class="line">  enable: true</span><br><span class="line">  hide: false</span><br><span class="line">  button: true</span><br><span class="line">  mobile: true     # display on mobile</span><br><span class="line">  position: left   # left or right，决定侧边栏在右边还是在左边</span><br><span class="line">  card_author:</span><br><span class="line">    enable: true</span><br><span class="line">    description:</span><br><span class="line">    button:</span><br><span class="line">      enable: true</span><br><span class="line">      icon: fab fa-github</span><br><span class="line">      text: github</span><br><span class="line">      link: https://github.com/username</span><br><span class="line">  card_announcement:        #公告</span><br><span class="line">    enable: false</span><br><span class="line">    content: 问题不大</span><br></pre></td></tr></table></figure>
+
+<p>后面一堆代码我就不列了，不需要的按钮可以用 false 关闭，在card_author的link后面写上自己主页的链接</p>
+<h3 id="社交按钮"><a href="#社交按钮" class="headerlink" title="社交按钮"></a>社交按钮</h3><p>在 <em>_config.butterfly.yml</em> 下找到 social ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># social settings (社交图标设置)</span><br><span class="line"># formal:</span><br><span class="line">#   icon: link || the description</span><br><span class="line">social:</span><br><span class="line">   #fab fa-github: https://github.com/xxx || Github</span><br><span class="line">   fas fa-envelope: mailto:xxx@example.com || Email</span><br></pre></td></tr></table></figure>
+
+<p>想要更多图标可在<a href="https://link.zhihu.com/?target=https://fontawesome.com/icons?from=io">font-awesome v6</a>中查找<br>找到后可查看其代码，如 QQ ：<br><code>&lt;i class=&quot;fa-brands fa-qq&quot;&gt;&lt;/i&gt;</code><br>可提取为 <code>fab fa-qq</code> 带入 socical 中：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">social:</span><br><span class="line">   #fab fa-github: https://github.com/xxx || Github</span><br><span class="line">   fas fa-envelope: mailto:xxx@example.com || Email</span><br><span class="line">   fab fa-qq: http://wpa.qq.com/msgrd?v=3&amp;uin=你自己的QQ号&amp;site=qq&amp;menu=yes || QQ</span><br></pre></td></tr></table></figure>
+
+<p>注意 ‘||’ 及后面的说明不能缺少。</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><h4 id="纯色背景"><a href="#纯色背景" class="headerlink" title="纯色背景"></a>纯色背景</h4><p>在 <em>_config.butterfly.yml</em> 下找到 theme_color ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">theme_color:</span><br><span class="line">  enable: true</span><br><span class="line">  main: &quot;#49B1F5&quot;</span><br><span class="line">  paginator: &quot;#00c4b6&quot;</span><br><span class="line">  button_hover: &quot;#FF7242&quot;</span><br><span class="line">  text_selection: &quot;#00c4b6&quot;</span><br><span class="line">  link_color: &quot;#99a9bf&quot;</span><br><span class="line">  meta_color: &quot;#858585&quot;</span><br><span class="line">  hr_color: &quot;#A4D8FA&quot;</span><br><span class="line">  code_foreground: &quot;#F47466&quot;</span><br><span class="line">  code_background: &quot;rgba(27, 31, 35, .05)&quot;</span><br><span class="line">  toc_color: &quot;#00c4b6&quot;</span><br><span class="line">  blockquote_padding_color: &quot;#49b1f5&quot;</span><br><span class="line">  blockquote_background_color: &quot;#49b1f5&quot;</span><br><span class="line">  scrollbar_color: &quot;#49b1f5&quot;</span><br></pre></td></tr></table></figure>
+
+<p>可自行更换主题中上述元素的颜色。</p>
+<h3 id="彩带背景"><a href="#彩带背景" class="headerlink" title="彩带背景"></a>彩带背景</h3><p>在 <em>_config.butterfly.yml</em> 下找到 canvas_ribbon ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># canvas_ribbon (静止彩带背景)</span><br><span class="line"># See: https://github.com/hustcc/ribbon.js</span><br><span class="line">canvas_ribbon:</span><br><span class="line">  enable: false</span><br><span class="line">  size: 150</span><br><span class="line">  alpha: 0.6</span><br><span class="line">  zIndex: -1</span><br><span class="line">  click_to_change: true   #点击鼠标更换彩带</span><br><span class="line">  mobile: false</span><br></pre></td></tr></table></figure>
+
+<p>后面还有动态彩带背景和canvas_nest（我也不知道是什么，有兴趣的可以试试看）</p>
+<h3 id="图片背景"><a href="#图片背景" class="headerlink" title="图片背景"></a>图片背景</h3><p>将自己喜欢的图片放入 <em>theme/butterfly/source/img</em> 中</p>
+<p>在 <em>_config.butterfly.yml</em> 下找到 background ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: url(/blog/img/bg.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>按上述代码写好即可</p>
+<h3 id="自定义渐变背景"><a href="#自定义渐变背景" class="headerlink" title="自定义渐变背景"></a>自定义渐变背景</h3><p>需要在 <em>theme/butterfly/source/css</em> 中新建一个 css 文件，文件名自取</p>
+<p>之后在 <em>_config.butterfly.yml</em> 下找到 inject ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Inject</span><br><span class="line"># 插入代码到头部 &lt;/head&gt; 之前 和 底部 &lt;/body&gt; 之前</span><br><span class="line">inject:</span><br><span class="line">  head:</span><br><span class="line">    - &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/mycss.css&quot;&gt;</span><br><span class="line">    # - &lt;link rel=&quot;stylesheet&quot; href=&quot;/xxx.css&quot;&gt;</span><br><span class="line">  bottom:</span><br><span class="line">    # - &lt;script src=&quot;xxxx&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在 head 中插入 <code>- &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/mycss.css&quot;&gt;</code></p>
+<p>关闭 js 动态背景</p>
+<p>原本 background 处改成：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background: &quot;#efefef&quot;</span><br></pre></td></tr></table></figure>
+
+<p>打开css文件，复制代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/* 背景渐变 */</span><br><span class="line">#web_bg&#123;</span><br><span class="line">    /*紫粉渐变*/</span><br><span class="line">    /*background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);*/</span><br><span class="line">    /*粉白蓝*/</span><br><span class="line">    background-image: linear-gradient(-225deg, #dfbacd 0%, #B8DCFF 48%, #58abf3 100%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可自行更改配置，不需要的代码用/* */注释， css 代码可在<a href="https://link.zhihu.com/?target=https://webgradients.com/">这里</a>得到，选择喜欢的渐变颜色，点击右下角 copy css 复制 css 代码即可。<br>效果如下：</p>
+<img data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/posts/butterfly%20(2).jpg" alt="img" style="zoom:67%;" />
+
+<h3 id="页脚"><a href="#页脚" class="headerlink" title="页脚"></a>页脚</h3><p>默认页脚为主题色。可在 <em>_config.butterfly.yml</em> 下找到 footer ，</p>
+<p>其中包含页脚设置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Footer Settings</span><br><span class="line"># --------------------------------------</span><br><span class="line">footer:</span><br><span class="line">  owner:</span><br><span class="line">    enable: true</span><br><span class="line">    since: 2022</span><br><span class="line">  custom_text:</span><br><span class="line">  copyright: true # Copyright of theme and framework</span><br></pre></td></tr></table></figure>
+
+<p>可以配置页脚显示的内容；</p>
+<p>还有页脚背景：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Footer Background</span><br><span class="line">footer_bg: false</span><br></pre></td></tr></table></figure>
+
+<p>打开后页脚图片将与主页图片（index_img）底部一致；</p>
+<p>也可进行自定义渐变页脚：</p>
+<p>在原本配置渐变背景的 css 文件下复制代码：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* 页脚footer */</span><br><span class="line">#footer &#123;</span><br><span class="line">    /* 与背景渐变效果一致*/</span><br><span class="line">    background-image: linear-gradient(-225deg, #d6badf 0%, #B8DCFF 28%, #58abf3 100%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#footer:before &#123;</span><br><span class="line">    background-color: rgba(0, 0, 0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/posts/butterfly%20(1).png" alt="img"></p>
+<p>同上，渐变效果可以自己配置。</p>
+<p>css 、js 还能配置许多效果，网上许多博主也有发布魔改教程，感兴趣的可以自行查找，这里不过多赘述。</p>
+<h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><h4 id="文章的封面"><a href="#文章的封面" class="headerlink" title="文章的封面"></a>文章的封面</h4><p>每篇文章都可以设置自己的封面，或者统一使用一个封面，这些都可以在 <em>_config.butterfly.yml</em> 下找到；</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cover:</span><br><span class="line">  # display the cover or not (是否显示文章封面)</span><br><span class="line">  index_enable: false</span><br><span class="line">  aside_enable: false</span><br><span class="line">  archives_enable: false</span><br><span class="line">  # the position of cover in home page (封面显示的位置)</span><br><span class="line">  # left/right/both</span><br><span class="line">  position: both</span><br><span class="line">  # When cover is not set, the default cover is displayed (当没有设置cover时，默认的封面显示)</span><br><span class="line">  default_cover:</span><br><span class="line">    # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg</span><br></pre></td></tr></table></figure>
+
+<p>建议没有文章封面时，将上述几个开关（ <code>index_enable</code> <code>aside_enable</code> <code>archives_enable</code>）都关掉，否则主页的格式会显得奇丑无比：</p>
+<p><img data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/posts/butterfly%20(1).jpg" alt="img"></p>
+<h3 id="文章基本设置"><a href="#文章基本设置" class="headerlink" title="文章基本设置"></a>文章基本设置</h3><p>在 <em>_config.butterfly.yml</em> 下找到 post_meta :</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">post_meta:</span><br><span class="line">  page: # Home Page</span><br><span class="line">    date_type: created # created or updated or both 主页文章日期是创建日或者更新日或都显示</span><br><span class="line">    date_format: date # date/relative 显示日期还是相对日期</span><br><span class="line">    categories: true # true or false 主页是否显示分类</span><br><span class="line">    tags: false # true or false 主页是否显示标签</span><br><span class="line">    label: true # true or false 显示描述性文字</span><br><span class="line">  post:</span><br><span class="line">    date_type: both # created or updated or both 文章页日期是创建日或者更新日或都显示</span><br><span class="line">    date_format: date # date/relative 显示日期还是相对日期</span><br><span class="line">    categories: true # true or false 文章页是否显示分类</span><br><span class="line">    tags: true # true or false 文章页是否显示标签</span><br><span class="line">    label: true # true or false 显示描述性文字</span><br></pre></td></tr></table></figure>
+
+<p>主页文章显示高度，显示篇数：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">index_post_content:</span><br><span class="line">  method: 3</span><br><span class="line">  length: 500 # if you set method to 2 or 3, the length need to config</span><br></pre></td></tr></table></figure>
+
+<p>这里我多开了一个字数统计，也是在 <em>_config.butterfly.yml</em> 里的</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># wordcount (字数统计)</span><br><span class="line">wordcount:</span><br><span class="line">  enable: true</span><br><span class="line">  post_wordcount: true</span><br><span class="line">  min2read: true</span><br><span class="line">  total_wordcount: true</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/"><span class="tags-punctuation"></span>Hexo<span class="tagsPageCount">6</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/Windows%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Windows软件推荐</div></div></a></div><div class="next-post pull-right"><a href="/Hexo/Qexo"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Qexo测试</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/Hexo/%E5%9B%BE%E5%BA%8A%E6%96%B9%E6%A1%88%E6%B1%87%E6%80%BB" title="图床方案汇总"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.15/cover/hexoimg.webp" alt="cover"><div class="content is-center"><div class="title">图床方案汇总</div></div></a></div><div><a href="/Hexo/Hexo%E9%9F%B3%E4%B9%90%E6%8E%92%E8%A1%8C-Netlify%20CMS" title="Hexo-QQ音乐排行-Netlify CMS"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/cover/hexo1.png" alt="cover"><div class="content is-center"><div class="title">Hexo-QQ音乐排行-Netlify CMS</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo-Butterfly%E4%B8%BB%E9%A2%98%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-text">Hexo Butterfly主题相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E5%AF%BC%E8%88%AA%E6%A0%8F"><span class="toc-text">首页导航栏</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E7%9A%84%E5%89%AF%E6%A0%87%E9%A2%98"><span class="toc-text">首页的副标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E9%A1%B5%E5%9B%BE%E7%89%87"><span class="toc-text">首页图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F"><span class="toc-text">侧边栏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BE%E4%BA%A4%E6%8C%89%E9%92%AE"><span class="toc-text">社交按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%AF%E8%89%B2%E8%83%8C%E6%99%AF"><span class="toc-text">纯色背景</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A9%E5%B8%A6%E8%83%8C%E6%99%AF"><span class="toc-text">彩带背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E8%83%8C%E6%99%AF"><span class="toc-text">图片背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B8%90%E5%8F%98%E8%83%8C%E6%99%AF"><span class="toc-text">自定义渐变背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E8%84%9A"><span class="toc-text">页脚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0"><span class="toc-text">文章</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E5%B0%81%E9%9D%A2"><span class="toc-text">文章的封面</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="toc-text">文章基本设置</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

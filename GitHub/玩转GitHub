@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>玩转全球最大同性交友网站-开源社区GitHub | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="玩转全球最大同性交友网站-开源社区GitHub1. 你是否有过这样的需求? 刚接触github，被一堆菜单选项搞得头大， 不知道怎么玩 想做一个网站，发布到公网， 让所有的人都可以访问到 希望全面知晓github一个开源项目的结构，也能像其他大神一样，把github 玩转 所以，跟着学起来吧！ 2"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">玩转全球最大同性交友网站-开源社区GitHub</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://npm.elemecdn.com/webxc/cover/github.png" alt="玩转全球最大同性交友网站-开源社区GitHub"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/GitHub/">GitHub</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GitHub/"><span class="tags-name tags-punctuation">GitHub</span></a></div></div></div></div><h1 class="post-title">玩转全球最大同性交友网站-开源社区GitHub</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><h3 id="玩转全球最大同性交友网站-开源社区GitHub"><a href="#玩转全球最大同性交友网站-开源社区GitHub" class="headerlink" title="玩转全球最大同性交友网站-开源社区GitHub"></a>玩转全球最大同性交友网站-开源社区GitHub</h3><h4 id="1-你是否有过这样的需求"><a href="#1-你是否有过这样的需求" class="headerlink" title="1. 你是否有过这样的需求?"></a>1. 你是否有过这样的需求?</h4><ul>
+<li>刚接触github，被一堆菜单选项搞得头大， 不知道怎么玩</li>
+<li>想做一个网站，发布到公网， 让所有的人都可以访问到</li>
+<li>希望全面知晓github一个开源项目的结构，也能像其他大神一样，把github 玩转</li>
+<li>所以，跟着学起来吧！</li>
+</ul>
+<h4 id="2-GitHub介绍"><a href="#2-GitHub介绍" class="headerlink" title="2. GitHub介绍"></a>2. <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=GitHub&spm=1001.2101.3001.7020">GitHub</a>介绍</h4><p>你需要的前置知识：GitHub 的基本操作</p>
+<ul>
+<li>GitHub 是一个面向开源及私有软件项目的托管平台， 官网： <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a></li>
+<li>被称为 “程序员的维基百科全书”被戏称 “全球最大同性交友网站”</li>
+<li>以 Git 为唯一的版本库格式进行托管，故名 GitHub</li>
+<li>注意: Git是一个版本管理工具，GitHub 是一个软件项目的托管平台(社区/网站)</li>
+<li>GitHub 于 2008上线，除了 Git 代码仓库托管以外(界面方式)，还提供订阅、讨论组、在线文件编辑器、协作图谱、代码片段分享（Gist）等功能。</li>
+<li>托管版本数量也是非常之多，知名开源项目 Ruby on Rails、jQuery、python 、Vue等。</li>
+<li>2018 年 ，微软宣布，通过 75 亿美元的股票交易收购代码托管平台 GitHub</li>
+</ul>
+<h4 id="3-GitHub实战-创建repository发布到公网，所有人能访问"><a href="#3-GitHub实战-创建repository发布到公网，所有人能访问" class="headerlink" title="3. GitHub实战: 创建repository发布到公网，所有人能访问"></a>3. GitHub实战: 创建repository发布到公网，所有人能访问</h4><ul>
+<li><strong>效果：网站 <a target="_blank" rel="noopener" href="https://xjsgithub.github.io/">https://xjsgithub.github.io/</a> 就会看到 好大的一只鲸鱼</strong></li>
+</ul>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/81b3a84a2c514729b18bbadf3fafc0f2.png" alt="在这里插入图片描述"></p>
+<h4 id="3-1-步骤1-按照规范创建一个repository，【提示使用电子邮件，先创建一个github账号】，访问github，推荐使用谷歌浏览器，-vpn，格式是-username-github-io"><a href="#3-1-步骤1-按照规范创建一个repository，【提示使用电子邮件，先创建一个github账号】，访问github，推荐使用谷歌浏览器，-vpn，格式是-username-github-io" class="headerlink" title="3.1 步骤1 : 按照规范创建一个repository，【提示使用电子邮件，先创建一个github账号】，访问github，推荐使用谷歌浏览器， vpn，格式是 username.github.io"></a>3.1 步骤1 : 按照规范创建一个repository，【提示使用电子邮件，先创建一个github账号】，访问github，推荐使用谷歌浏览器， vpn，格式是 username.github.io</h4><p><img data-lazy-src="https://npm.elemecdn.com/webxc/cover/github.png" alt="在这里插入图片描述"></p>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/c64983ac28f746389a474e8af783bc6f.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/39454cf68bb24b7ea39d0de6d1fb66c1.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/1217573e71cb458c924820e5e36c6285.png#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="3-2-步骤2-下载github-desktop，并和-github账号关联"><a href="#3-2-步骤2-下载github-desktop，并和-github账号关联" class="headerlink" title="3.2 步骤2: 下载github desktop，并和 github账号关联"></a>3.2 步骤2: 下载github desktop，并和 github账号关联</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/75026fc941584b74a2c7aaff94cb2a89.png" alt="在这里插入图片描述"></p>
+<h4 id="3-3-步骤3：创建本地-repository仓库"><a href="#3-3-步骤3：创建本地-repository仓库" class="headerlink" title="3.3 步骤3：创建本地 repository仓库"></a>3.3 步骤3：创建本地 repository仓库</h4><ol>
+<li>直接进 sign in to github.com</li>
+<li>输入密码后，就可以登录，选择创建 repository</li>
+</ol>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/65e427953f1f4372b629996be2224957.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/d194affb49db42bdb9bea08fc7696629.png" alt="在这里插入图片描述"></p>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/cd0cb9015ece471faa7c2b6c59767e73.png" alt="在这里插入图片描述"></p>
+<h3 id="3-4-步骤4-选择-username-github-io-的窗口，进行clone"><a href="#3-4-步骤4-选择-username-github-io-的窗口，进行clone" class="headerlink" title="3.4 步骤4: 选择 username.github.io 的窗口，进行clone"></a>3.4 步骤4: 选择 username.github.io 的窗口，进行clone</h3><p><img data-lazy-src="https://img-blog.csdnimg.cn/e1e221c9e87c42a0abae659fe606f9a3.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/2074f22b36ba459b9792f622863e8845.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/167a4f9e5e32432f9c760bb4a4416cff.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/161b0c19b2ed45f0941f731596607e74.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/4356660f7f2943449fa2fe99f8a7a1f4.png" alt="在这里插入图片描述"><br><img data-lazy-src="https://img-blog.csdnimg.cn/6a7fda3f199e4088ad78f91ec3d7b40f.png" alt="在这里插入图片描述"></p>
+<h4 id="3-5-步骤5-将本地仓库上传到-GitHub"><a href="#3-5-步骤5-将本地仓库上传到-GitHub" class="headerlink" title="3.5 步骤5: 将本地仓库上传到 GitHub"></a>3.5 步骤5: 将本地仓库上传到 GitHub</h4><ol>
+<li>clone后，进入到项目对应的文件夹(空的)，将你的项目源码文件拷贝到这里</li>
+<li>会看到github desktop 有新的文件，先commit到本地仓库, 然后在进行publish branch（进上传到 github.com）, 这时你会看到github.com 你的username.github.io 有源文件加入了</li>
+</ol>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/4aeb9a40b0754a908dfbab1d931d02ec.png" alt="在这里插入图片描述"></p>
+<p><img data-lazy-src="https://img-blog.csdnimg.cn/d418b7deae3c480a9b257dd75448fc7d.png" alt="在这里插入图片描述"></p>
+<h4 id="3-6-步骤6-访问网站-https-xjsgithub-github-io-就会看到-好大的一只鲸鱼"><a href="#3-6-步骤6-访问网站-https-xjsgithub-github-io-就会看到-好大的一只鲸鱼" class="headerlink" title="3.6 步骤6: 访问网站 https://xjsgithub.github.io/ 就会看到 好大的一只鲸鱼"></a>3.6 步骤6: 访问网站 <a target="_blank" rel="noopener" href="https://xjsgithub.github.io/">https://xjsgithub.github.io/</a> 就会看到 好大的一只鲸鱼</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/9666463d41ef4197a8abf8c1cb87bc16.png" alt="在这里插入图片描述"></p>
+<h4 id="4-申请顶级域名，并指向-https-xjsgithub-github-io"><a href="#4-申请顶级域名，并指向-https-xjsgithub-github-io" class="headerlink" title="4. 申请顶级域名，并指向 https://xjsgithub.github.io/"></a>4. 申请顶级域名，并指向 <a target="_blank" rel="noopener" href="https://xjsgithub.github.io/">https://xjsgithub.github.io/</a></h4><h4 id="4-1-在阿里云、腾讯云、-GoDaddy或者-freenom-去申请域名，指向-https-xjsgithub-github-io"><a href="#4-1-在阿里云、腾讯云、-GoDaddy或者-freenom-去申请域名，指向-https-xjsgithub-github-io" class="headerlink" title="4.1 在阿里云、腾讯云、 GoDaddy或者 freenom 去申请域名，指向 https://xjsgithub.github.io/"></a>4.1 在阿里云、腾讯云、 GoDaddy或者 freenom 去申请域名，指向 <a target="_blank" rel="noopener" href="https://xjsgithub.github.io/">https://xjsgithub.github.io/</a></h4><ul>
+<li><a target="_blank" rel="noopener" href="https://www.aliyun.com/">https://www.aliyun.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/">https://cloud.tencent.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://sg.godaddy.com/">https://sg.godaddy.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freenom.com/">https://www.freenom.com/</a></li>
+</ul>
+<h4 id="4-2-在GitHub上设置你自己的域名即可"><a href="#4-2-在GitHub上设置你自己的域名即可" class="headerlink" title="4.2 在GitHub上设置你自己的域名即可"></a>4.2 在GitHub上设置你自己的域名即可</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/396a924abf91453b8ed6663aab934385.png" alt="img"></p>
+<h4 id="5-看一个实际开源项目-jQuery"><a href="#5-看一个实际开源项目-jQuery" class="headerlink" title="5. 看一个实际开源项目 jQuery"></a>5. 看一个实际开源项目 jQuery</h4><h4 id="5-1-界面-https-github-com-jquery-jquery"><a href="#5-1-界面-https-github-com-jquery-jquery" class="headerlink" title="5.1 界面 https://github.com/jquery/jquery"></a>5.1 界面 <a target="_blank" rel="noopener" href="https://github.com/jquery/jquery">https://github.com/jquery/jquery</a></h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/626a019a2ac3499f890a3d705978ac71.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>github上的项目文档是 markdown编写</li>
+<li>Watch: 关注项目变化，如被别人提交了 pull request、发起了issue等等，在你的通知中心，收到一条消息</li>
+<li>Star: 类似微信朋友圈的点赞， 支持，让该项目更有热度.</li>
+<li>Fork: 得到一份原项目的拷贝，如果后续原项目改变，需要自己去处理同步</li>
+<li>Branch: 分支</li>
+<li>Tag: 标签</li>
+</ul>
+<h4 id="5-2-项目不同版本比较-https-github-com-jquery-jquery-compare"><a href="#5-2-项目不同版本比较-https-github-com-jquery-jquery-compare" class="headerlink" title="5.2 项目不同版本比较 https://github.com/jquery/jquery/compare"></a>5.2 项目不同版本比较 <a target="_blank" rel="noopener" href="https://github.com/jquery/jquery/compare">https://github.com/jquery/jquery/compare</a></h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/b3113912f3664ea6b1885a3401ea00b3.png" alt="在这里插入图片描述"></p>
+<ul>
+<li><code>项目的url/compare</code> 可以对不同版本比较，如图</li>
+<li>比如可以看到有多少个文件的变化，有多少次commit</li>
+<li>提示：直接使用 git工具也可以进行版本比较</li>
+</ul>
+<h4 id="5-3-issues"><a href="#5-3-issues" class="headerlink" title="5.3 issues"></a>5.3 issues</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/987cd4329dc34ed8b834e4eef085ca6c.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>issues —- 评论/话题，对项目提出各种讨论，比如Bug、Build 、help wanted等，有各种问题都可以提</li>
+<li>状态 Open : 讨论中</li>
+<li>Closed：关闭，如已经解决</li>
+<li>issues 可以增加开发者和使用者的交流，也可以创建一个issue</li>
+</ul>
+<h4 id="5-4-pull-requests"><a href="#5-4-pull-requests" class="headerlink" title="5.4 pull requests"></a>5.4 pull requests</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/16bc9edec7994947bafb6010590d2d77.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>简称pr，你如果要往该项目贡献代码，你可以在Github上发起一个Pull Request</li>
+<li>如果被审核(code review)通过并正式合并，这样你就为项目做贡献了</li>
+</ul>
+<h4 id="5-5-Actions"><a href="#5-5-Actions" class="headerlink" title="5.5 Actions"></a>5.5 Actions</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/fbf46b8e7d9341afba5c2b14b4de02b1.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>GitHub Action 是 GitHub 推出的一个 CI\CD 服务</li>
+<li>CI\CD 其实是：持续集成、持续交付、持续部署</li>
+<li>一般我们把GitHub当做代码仓库或者版本管理工具来用，有 GitHub Action 以后，能做的事情就更多，比如在 master 分支上提交了一段代码， GitHub Action 可以自动部署到指定的服务器上去，还可以把代码做成镜像，将镜像自动提交到镜像仓库里</li>
+</ul>
+<h4 id="5-6-Projects"><a href="#5-6-Projects" class="headerlink" title="5.6 Projects"></a>5.6 Projects</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/6313b80a721e4bf6945cada170160f80.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>GitHub 上的项目板【需要权限】</li>
+<li>帮助组织工作和排列工作的优先级。</li>
+<li>项目板可以灵活地创建适合需求的工作流程。</li>
+<li>项目板包括议题、拉取请求和注释，在选择的列中分类为卡片</li>
+<li>拖放或使用键盘快捷键对列中的卡片重新排序，在不同列之间移动卡片，以及更改列的顺序</li>
+</ul>
+<h4 id="5-7-Wiki"><a href="#5-7-Wiki" class="headerlink" title="5.7 Wiki"></a>5.7 Wiki</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/9f6f2885328c4f97a8368c8ae9dab887.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>维基百科（Wikipedia）</li>
+<li>可以把项目的方方面面进行说明，支持markdown</li>
+</ul>
+<h4 id="5-8-insights"><a href="#5-8-insights" class="headerlink" title="5.8 insights"></a>5.8 insights</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/1bdbfda0883c4664bc8564b0ac4855db.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>项目的总体浏览相关统计信息</li>
+<li>Contributors: 看到用户在相应日期中发送提交、添加代码、删除代码的大致数量</li>
+<li>commits: 显示了一年收到的提交大致数量。可以判断某个仓库是否在积极更新</li>
+<li>Code Frequency（频率）：显示了该仓库中代码行数的增加量和删除量。</li>
+<li>Network（分支网络）: 显示包括克隆仓库在内的所有分支的提交。</li>
+<li>Fork: 服务端的代码仓库克隆情况</li>
+</ul>
+<h4 id="5-9-settings"><a href="#5-9-settings" class="headerlink" title="5.9 settings"></a>5.9 settings</h4><p><img data-lazy-src="https://img-blog.csdnimg.cn/b88dd4a8eb424c858a2af5af57b51f48.png" alt="在这里插入图片描述"></p>
+<ul>
+<li>对仓库进行任何设置。用户必须有更改权限的设置(一般是自己的repository)才看到这个页面</li>
+<li>修改仓库名称</li>
+<li>Features： 更改Wiki和Issue的相关设置。如果想关闭某些功能，只要取消勾选相应复选框即可。</li>
+<li>Merge Button: 设置合并代码方式</li>
+<li>GitHub Pages: 每个Github账户都可以开一个自己的静态网站（域名为 username.github.io)</li>
+<li>Danger Zone: 用户可以将仓库改为私有或是变更仓库的所有者，甚至删除仓库本身。这里操作一定要谨慎</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GitHub/"><span class="tags-punctuation"></span>GitHub<span class="tagsPageCount">3</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Hexo/Hexo%E9%9F%B3%E4%B9%90%E6%8E%92%E8%A1%8C-Netlify%20CMS"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hexo-QQ音乐排行-Netlify CMS</div></div></a></div><div class="next-post pull-right"><a href="/jQuery/jQuery%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E4%B8%8EbootstrapjQuery%E6%8F%92%E4%BB%B6%E7%94%A8%E6%B3%95"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">jQuery自动触发事件与bootstrap/jQuery插件用法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/GitHub/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4" title="Git常用命令"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.1/cover/git1.jpg" alt="cover"><div class="content is-center"><div class="title">Git常用命令</div></div></a></div><div><a href="/GitHub/Git%E5%9F%BA%E7%A1%80-Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D" title="Git基础-Github自定义域名"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/cover/cover5.jpg" alt="cover"><div class="content is-center"><div class="title">Git基础-Github自定义域名</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%A9%E8%BD%AC%E5%85%A8%E7%90%83%E6%9C%80%E5%A4%A7%E5%90%8C%E6%80%A7%E4%BA%A4%E5%8F%8B%E7%BD%91%E7%AB%99-%E5%BC%80%E6%BA%90%E7%A4%BE%E5%8C%BAGitHub"><span class="toc-text">玩转全球最大同性交友网站-开源社区GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BD%A0%E6%98%AF%E5%90%A6%E6%9C%89%E8%BF%87%E8%BF%99%E6%A0%B7%E7%9A%84%E9%9C%80%E6%B1%82"><span class="toc-text">1. 你是否有过这样的需求?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-GitHub%E4%BB%8B%E7%BB%8D"><span class="toc-text">2. GitHub介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-GitHub%E5%AE%9E%E6%88%98-%E5%88%9B%E5%BB%BArepository%E5%8F%91%E5%B8%83%E5%88%B0%E5%85%AC%E7%BD%91%EF%BC%8C%E6%89%80%E6%9C%89%E4%BA%BA%E8%83%BD%E8%AE%BF%E9%97%AE"><span class="toc-text">3. GitHub实战: 创建repository发布到公网，所有人能访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%AD%A5%E9%AA%A41-%E6%8C%89%E7%85%A7%E8%A7%84%E8%8C%83%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AArepository%EF%BC%8C%E3%80%90%E6%8F%90%E7%A4%BA%E4%BD%BF%E7%94%A8%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%EF%BC%8C%E5%85%88%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAgithub%E8%B4%A6%E5%8F%B7%E3%80%91%EF%BC%8C%E8%AE%BF%E9%97%AEgithub%EF%BC%8C%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%8C-vpn%EF%BC%8C%E6%A0%BC%E5%BC%8F%E6%98%AF-username-github-io"><span class="toc-text">3.1 步骤1 : 按照规范创建一个repository，【提示使用电子邮件，先创建一个github账号】，访问github，推荐使用谷歌浏览器， vpn，格式是 username.github.io</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%AD%A5%E9%AA%A42-%E4%B8%8B%E8%BD%BDgithub-desktop%EF%BC%8C%E5%B9%B6%E5%92%8C-github%E8%B4%A6%E5%8F%B7%E5%85%B3%E8%81%94"><span class="toc-text">3.2 步骤2: 下载github desktop，并和 github账号关联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-%E6%AD%A5%E9%AA%A43%EF%BC%9A%E5%88%9B%E5%BB%BA%E6%9C%AC%E5%9C%B0-repository%E4%BB%93%E5%BA%93"><span class="toc-text">3.3 步骤3：创建本地 repository仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%AD%A5%E9%AA%A44-%E9%80%89%E6%8B%A9-username-github-io-%E7%9A%84%E7%AA%97%E5%8F%A3%EF%BC%8C%E8%BF%9B%E8%A1%8Cclone"><span class="toc-text">3.4 步骤4: 选择 username.github.io 的窗口，进行clone</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-%E6%AD%A5%E9%AA%A45-%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0%E5%88%B0-GitHub"><span class="toc-text">3.5 步骤5: 将本地仓库上传到 GitHub</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-%E6%AD%A5%E9%AA%A46-%E8%AE%BF%E9%97%AE%E7%BD%91%E7%AB%99-https-xjsgithub-github-io-%E5%B0%B1%E4%BC%9A%E7%9C%8B%E5%88%B0-%E5%A5%BD%E5%A4%A7%E7%9A%84%E4%B8%80%E5%8F%AA%E9%B2%B8%E9%B1%BC"><span class="toc-text">3.6 步骤6: 访问网站 https:&#x2F;&#x2F;xjsgithub.github.io&#x2F; 就会看到 好大的一只鲸鱼</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E7%94%B3%E8%AF%B7%E9%A1%B6%E7%BA%A7%E5%9F%9F%E5%90%8D%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%90%91-https-xjsgithub-github-io"><span class="toc-text">4. 申请顶级域名，并指向 https:&#x2F;&#x2F;xjsgithub.github.io&#x2F;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-%E5%9C%A8%E9%98%BF%E9%87%8C%E4%BA%91%E3%80%81%E8%85%BE%E8%AE%AF%E4%BA%91%E3%80%81-GoDaddy%E6%88%96%E8%80%85-freenom-%E5%8E%BB%E7%94%B3%E8%AF%B7%E5%9F%9F%E5%90%8D%EF%BC%8C%E6%8C%87%E5%90%91-https-xjsgithub-github-io"><span class="toc-text">4.1 在阿里云、腾讯云、 GoDaddy或者 freenom 去申请域名，指向 https:&#x2F;&#x2F;xjsgithub.github.io&#x2F;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-%E5%9C%A8GitHub%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9F%9F%E5%90%8D%E5%8D%B3%E5%8F%AF"><span class="toc-text">4.2 在GitHub上设置你自己的域名即可</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E7%9C%8B%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE-jQuery"><span class="toc-text">5. 看一个实际开源项目 jQuery</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-%E7%95%8C%E9%9D%A2-https-github-com-jquery-jquery"><span class="toc-text">5.1 界面 https:&#x2F;&#x2F;github.com&#x2F;jquery&#x2F;jquery</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-%E9%A1%B9%E7%9B%AE%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E6%AF%94%E8%BE%83-https-github-com-jquery-jquery-compare"><span class="toc-text">5.2 项目不同版本比较 https:&#x2F;&#x2F;github.com&#x2F;jquery&#x2F;jquery&#x2F;compare</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-issues"><span class="toc-text">5.3 issues</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-4-pull-requests"><span class="toc-text">5.4 pull requests</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-5-Actions"><span class="toc-text">5.5 Actions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-6-Projects"><span class="toc-text">5.6 Projects</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-7-Wiki"><span class="toc-text">5.7 Wiki</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-8-insights"><span class="toc-text">5.8 insights</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-9-settings"><span class="toc-text">5.9 settings</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

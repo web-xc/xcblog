@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Node.js的基本使用 | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="Node.js的基本使用Vscode中的Node.js代码提示插件: npm install –save-dev @types&amp;#x2F;node 1. Node客户端与服务端JS的区别: 浏览器JS部分: 变量、运算符、流程控制、数据类型、DOM、BOM 服务端node.js只有一个部分: ECMAScr"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Node.js的基本使用</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/nodejslogo.jpg" alt="Node.js的基本使用"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/Vue前置基础/">Vue前置基础</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/"><span class="tags-name tags-punctuation">Vue前置基础</span></a></div></div></div></div><h1 class="post-title">Node.js的基本使用</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><h3 id="Node-js的基本使用"><a href="#Node-js的基本使用" class="headerlink" title="Node.js的基本使用"></a>Node.js的基本使用</h3><p><strong>Vscode中的Node.js代码提示插件: npm install –save-dev @types/node</strong></p>
+<h3 id="1-Node客户端与服务端JS的区别"><a href="#1-Node客户端与服务端JS的区别" class="headerlink" title="1. Node客户端与服务端JS的区别:"></a>1. Node客户端与服务端JS的区别:</h3><ol>
+<li><p>浏览器JS部分: 变量、运算符、流程控制、数据类型、DOM、BOM</p>
+</li>
+<li><p>服务端node.js只有一个部分: ECMAScript</p>
+</li>
+<li><p>在node.js中不能执行DOM、BOM</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用node环境下的node命令来执行代码 tab键补全</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fn</span>(<span class="number">1</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-模块化开发思想"><a href="#2-模块化开发思想" class="headerlink" title="2 .模块化开发思想"></a>2 .模块化开发思想</h3><ol>
+<li>将大文件拆分为小文件, 然后用<strong>特定语法组合在一起</strong></li>
+<li><strong>好处: 1.用什么引入什么 2.避免变量污染 一个文件就是独立的作用域</strong></li>
+<li>业务分离: 不同功能在不同文件, 便于维护</li>
+</ol>
+<p><strong>4. 模块化语法有两种</strong></p>
+<ul>
+<li><p>Commonjs规范: 运行在node环境 (vue项目编译.less .vue文件会有)</p>
+</li>
+<li><p>ES6规范: 运行在浏览器环境, <a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/l">ES6规范文档</a></p>
+</li>
+<li><p>CommonJS规范文档: <a target="_blank" rel="noopener" href="http://javascript.ruanyifeng.com/nodejs/module.html">点击查询</a></p>
+</li>
+</ul>
+<h3 id="3-Commonjs模块化语法-只有两个"><a href="#3-Commonjs模块化语法-只有两个" class="headerlink" title="3. Commonjs模块化语法: 只有两个"></a>3. Commonjs模块化语法: 只有两个</h3><h4 id="1-文件导出"><a href="#1-文件导出" class="headerlink" title="1. 文件导出"></a>1. 文件导出</h4><ul>
+<li>模块化语法有缓存机制, 不会重复导入对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.exports = &#123;属性名: 属性值&#125;</span></span><br><span class="line"><span class="comment">// 1. 模块 == 文件</span></span><br><span class="line"><span class="comment">// 2. 每个模块都有自己的独立作用域 外部无法访问</span></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;张三&#x27;</span></span><br><span class="line"><span class="keyword">let</span> age = <span class="number">10</span></span><br><span class="line"><span class="comment">// 3. 导出模块: 想让哪个文件用就导出哪个</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: name,</span><br><span class="line">    age</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 4. 不会重复导入对象</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">111</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-文件模块导入"><a href="#2-文件模块导入" class="headerlink" title="2. 文件模块导入"></a>2. 文件模块导入</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// let 模块名 = require(&#x27;文件路径&#x27;)</span></span><br><span class="line"><span class="keyword">let</span> mokuai = <span class="built_in">require</span>(<span class="string">&#x27;./mokuai.js&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mokuai)</span><br><span class="line"><span class="comment">// 模块化语法有缓存机制</span></span><br><span class="line"><span class="keyword">let</span> m = <span class="built_in">require</span>(<span class="string">&#x27;./mokuai.js&#x27;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(m)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mokuai == m) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-FS读写模块"><a href="#4-FS读写模块" class="headerlink" title="4. FS读写模块"></a>4. FS读写模块</h2><h3 id="1-导入fs模块-fs在node-js中"><a href="#1-导入fs模块-fs在node-js中" class="headerlink" title="1. 导入fs模块-fs在node.js中"></a>1. 导入fs模块-fs在node.js中</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-读取文件-readFile"><a href="#2-读取文件-readFile" class="headerlink" title="2. 读取文件 readFile"></a>2. 读取文件 readFile</h3><ol>
+<li>参数1: path 文件路径</li>
+<li>参数2: encoding 文件默认十六进制 使用中文utf8 </li>
+<li>参数3: (err错误信息, data文件数据/buffer数据流对象) </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&#x27;./txt/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// 有err说明失败 没有则成功</span></span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-写入文件-writeFile"><a href="#3-写入文件-writeFile" class="headerlink" title="3. 写入文件 writeFile"></a>3. 写入文件 writeFile</h3><ol>
+<li>参数1: 文件路径</li>
+<li>参数2: 要写入的数据</li>
+<li>参数3: 文件编码 默认是本身数据格式</li>
+<li>参数4: err =&gt; {}</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="title function_">writeFile</span>(<span class="string">&#x27;./txt/1.txt&#x27;</span>, <span class="string">&#x27;你好啊&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// 如果本身有文件会覆盖 没有则创建文件</span></span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-Path模块-处理文件路径"><a href="#5-Path模块-处理文件路径" class="headerlink" title="5. Path模块: 处理文件路径"></a>5. Path模块: 处理文件路径</h2><h3 id="1-导入path模块–拼接路径"><a href="#1-导入path模块–拼接路径" class="headerlink" title="1. 导入path模块–拼接路径"></a>1. 导入path模块–拼接路径</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-使用模块"><a href="#2-使用模块" class="headerlink" title="2. 使用模块"></a>2. 使用模块</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 获取文件扩展名 告诉你文件是什么格式 extname</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">extname</span>(<span class="string">&#x27;./txt/1.txt&#x27;</span>))</span><br><span class="line"><span class="comment">// 2. 拼接相对路径 a/b/c 用join方法 对象join跟这个不一样</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">join</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>))</span><br><span class="line"><span class="comment">// 3. 拼接绝对路径 默认从磁盘拼接 c://xxxx/a/b resolve</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(path.<span class="title function_">resolve</span>(<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>))</span><br><span class="line"><span class="comment">// 4. 获取当前文件的绝对路径 __dirname</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(__dirname)</span><br><span class="line"><span class="comment">// dirname可以代替resolve方法 区别为: 用dirname不用导入模块</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/a/b`</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-Http服务器模块-用于搭建服务器"><a href="#6-Http服务器模块-用于搭建服务器" class="headerlink" title="6. Http服务器模块: 用于搭建服务器"></a>6. Http服务器模块: 用于搭建服务器</h2><h3 id="1-导入http模块"><a href="#1-导入http模块" class="headerlink" title="1. 导入http模块"></a>1. 导入http模块</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建服务器-createSecureServer"><a href="#2-创建服务器-createSecureServer" class="headerlink" title="2. 创建服务器 createSecureServer"></a>2. 创建服务器 createSecureServer</h3><ol>
+<li>参数: 请求报文 响应报文</li>
+<li>url中遇到中文则会变成URI编码 用decodeURI解析出来</li>
+<li>想实现不同路径响应不同数据 先判断url 根据不同url响应不同数据</li>
+<li>end方法: 结束本次响应 返回响应体</li>
+<li>服务器响应中文 浏览器会乱码 在响应头设置数据格式来解决</li>
+<li>用plain最小字体显示 html为默认大小</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(request.<span class="property">url</span>, <span class="built_in">decodeURI</span>(request.<span class="property">url</span>)) <span class="comment">// 请求报文</span></span><br><span class="line">    response.<span class="title function_">writeHead</span>(<span class="number">200</span>, &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/html;charset=utf-8&#x27;</span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">// 想实现不同路径响应不同数据 先判断url 根据不同url响应不同数据</span></span><br><span class="line">    <span class="keyword">if</span> (request.<span class="property">url</span> === <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">        response.<span class="title function_">end</span>(<span class="string">&#x27;我是首页&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request.<span class="property">url</span> === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">        response.<span class="title function_">end</span>(<span class="string">&#x27;我是登录页&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        response.<span class="title function_">end</span>(<span class="string">&#x27;404 not found&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-运行服务器"><a href="#3-运行服务器" class="headerlink" title="3. 运行服务器"></a>3. 运行服务器</h3><ol>
+<li>参数1: port端口号 系统为区分上网软件 每个软件会分配编号 (1-65535范围 3000以内会被系统占用)</li>
+<li>参数2: hostname主机名 (ip地址)</li>
+<li>参数3: 运行成功回调 () =&gt; {} </li>
+<li>ip省略不写默认为 127.0.0.1 只能本机访问</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">listen</span>(<span class="string">&#x27;3000&#x27;</span>, <span class="string">&#x27;192.168.0.103&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 192.168.0.103:3000</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;开启成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7-Http模块响应Html文件"><a href="#7-Http模块响应Html文件" class="headerlink" title="7. Http模块响应Html文件"></a>7. Http模块响应Html文件</h2><ol>
+<li><p>导入http模块</p>
+</li>
+<li><p>创建服务器 createSecureServer</p>
+</li>
+<li><p>运行服务器</p>
+</li>
+</ol>
+<h3 id="这里主要创建服务器-其他都一样"><a href="#这里主要创建服务器-其他都一样" class="headerlink" title="这里主要创建服务器, 其他都一样"></a>这里主要创建服务器, 其他都一样</h3><ol>
+<li>使用fs模块读取文件响应给浏览器 用dirname获取文件路径</li>
+<li>判断成功则响应文件数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">url</span>, <span class="built_in">decodeURI</span>(req.<span class="property">url</span>))</span><br><span class="line"><span class="comment">// 1.使用fs模块读取文件响应给浏览器 用dirname获取文件路径</span></span><br><span class="line">    <span class="keyword">if</span> (req.<span class="property">url</span> == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/index.html`</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// 2.判断成功则响应文件数据</span></span><br><span class="line">             <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">             res.<span class="title function_">end</span>(data)</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (req.<span class="property">url</span> == <span class="string">&#x27;/o&#x27;</span>) &#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/login.html`</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">             <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">             res.<span class="title function_">end</span>(data)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="8-使用Http、FS、Path模块渲染网页"><a href="#8-使用Http、FS、Path模块渲染网页" class="headerlink" title="8. 使用Http、FS、Path模块渲染网页"></a>8. 使用Http、FS、Path模块渲染网页</h2><ol>
+<li>html中所有外部资料都会变成网络请求</li>
+<li>静态资源请求url 与文件路径一致 一般会自动拼接路径响应返回</li>
+<li>文件夹结构: <img data-lazy-src="https://cdn.staticaly.com/gh/web-xc/iMG@main/postss/nodejs%E6%A1%88%E4%BE%8B.jpg" style="zoom: 33%;" /></li>
+</ol>
+<h3 id="1-导入http模块-fs模块"><a href="#1-导入http模块-fs模块" class="headerlink" title="1. 导入http模块 fs模块"></a>1. 导入http模块 fs模块</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建服务器"><a href="#2-创建服务器" class="headerlink" title="2. 创建服务器"></a>2. 创建服务器</h3><ol>
+<li>断url 并使用fs模块读取文件 判断文件并响应文件</li>
+<li>根据请求的url拼接读取对应文件的路径并返回</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = http.<span class="title function_">createServer</span>(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(req.<span class="property">url</span>)</span><br><span class="line"><span class="comment">// 4. 判断url 并使用fs模块读取文件 判断文件并响应文件</span></span><br><span class="line">    <span class="keyword">if</span> (req.<span class="property">url</span> == <span class="string">&#x27;/&#x27;</span>) &#123;</span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/www/index.html`</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="keyword">throw</span> err</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.<span class="title function_">end</span>(data)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">// 5. 根据请求的url拼接读取对应文件的路径并返回</span></span><br><span class="line">        fs.<span class="title function_">readFile</span>(<span class="string">`<span class="subst">$&#123;__dirname&#125;</span>/www/<span class="subst">$&#123;<span class="built_in">decodeURI</span>(req.url)&#125;</span>`</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="keyword">throw</span> err</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                res.<span class="title function_">end</span>(data)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-开启服务器"><a href="#3-开启服务器" class="headerlink" title="3. 开启服务器"></a>3. 开启服务器</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">listen</span>(<span class="string">&#x27;3000&#x27;</span>, <span class="string">&#x27;192.168.0.103&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;开启成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<img data-lazy-src="https://secure2.wostatic.cn/static/cfac23MsNTio5pFkAKskKG/image.png?auth_key=1687164317-xwbyTPEf4Hk41sHSVdDMGv-0-4fd7b167cb7fbd7f3424f0616a223114&file_size=141660" style="zoom:50%;" />
+
+<img data-lazy-src="https://secure2.wostatic.cn/static/vkbbRLEUbmHBuNAn413UTu/image.png?auth_key=1687180265-erkBBZoyAMUjBTaBMFoVHc-0-54fcde6a8e2156fbd8a261f1b03b3f23&file_size=67098" style="zoom: 50%;" />
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/"><span class="tags-punctuation"></span>Vue前置基础<span class="tagsPageCount">5</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/3.NPM%E7%9A%84%E4%BD%BF%E7%94%A8"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">NPM的基本使用</div></div></a></div><div class="next-post pull-right"><a href="/Ajax%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E9%BB%91%E9%A9%AC%E5%A4%B4%E6%9D%A1%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">黑马头条-数据管理平台</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/5.ES6%E6%A8%A1%E5%9D%97%E5%8C%96%E4%B8%8EWebpack%E5%85%A5%E9%97%A8" title="ES6模块化与Webpack入门"><img class="cover" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/webpack.jpg" alt="cover"><div class="content is-center"><div class="title">ES6模块化与Webpack入门</div></div></a></div><div><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/1.Vue%E5%89%8D%E7%BD%AEJS%E5%8A%9F%E5%BA%95" title="Vue前置JS功底"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc/cover/js1.webp" alt="cover"><div class="content is-center"><div class="title">Vue前置JS功底</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">Node.js的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Node%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AFJS%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">1. Node客户端与服务端JS的区别:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91%E6%80%9D%E6%83%B3"><span class="toc-text">2 .模块化开发思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Commonjs%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%AD%E6%B3%95-%E5%8F%AA%E6%9C%89%E4%B8%A4%E4%B8%AA"><span class="toc-text">3. Commonjs模块化语法: 只有两个</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%87%E4%BB%B6%E5%AF%BC%E5%87%BA"><span class="toc-text">1. 文件导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5"><span class="toc-text">2. 文件模块导入</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-FS%E8%AF%BB%E5%86%99%E6%A8%A1%E5%9D%97"><span class="toc-text">4. FS读写模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5fs%E6%A8%A1%E5%9D%97-fs%E5%9C%A8node-js%E4%B8%AD"><span class="toc-text">1. 导入fs模块-fs在node.js中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6-readFile"><span class="toc-text">2. 读取文件 readFile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%86%99%E5%85%A5%E6%96%87%E4%BB%B6-writeFile"><span class="toc-text">3. 写入文件 writeFile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Path%E6%A8%A1%E5%9D%97-%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-text">5. Path模块: 处理文件路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5path%E6%A8%A1%E5%9D%97%E2%80%93%E6%8B%BC%E6%8E%A5%E8%B7%AF%E5%BE%84"><span class="toc-text">1. 导入path模块–拼接路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">2. 使用模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Http%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%9D%97-%E7%94%A8%E4%BA%8E%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">6. Http服务器模块: 用于搭建服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5http%E6%A8%A1%E5%9D%97"><span class="toc-text">1. 导入http模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8-createSecureServer"><span class="toc-text">2. 创建服务器 createSecureServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">3. 运行服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Http%E6%A8%A1%E5%9D%97%E5%93%8D%E5%BA%94Html%E6%96%87%E4%BB%B6"><span class="toc-text">7. Http模块响应Html文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%99%E9%87%8C%E4%B8%BB%E8%A6%81%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8-%E5%85%B6%E4%BB%96%E9%83%BD%E4%B8%80%E6%A0%B7"><span class="toc-text">这里主要创建服务器, 其他都一样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%BD%BF%E7%94%A8Http%E3%80%81FS%E3%80%81Path%E6%A8%A1%E5%9D%97%E6%B8%B2%E6%9F%93%E7%BD%91%E9%A1%B5"><span class="toc-text">8. 使用Http、FS、Path模块渲染网页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5http%E6%A8%A1%E5%9D%97-fs%E6%A8%A1%E5%9D%97"><span class="toc-text">1. 导入http模块 fs模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">2. 创建服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BC%80%E5%90%AF%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">3. 开启服务器</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

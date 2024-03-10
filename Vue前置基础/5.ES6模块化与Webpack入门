@@ -1,0 +1,559 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ES6模块化与Webpack入门 | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="vue将每一个组件看作是一个独立的模块 (类似于nodejs中的) 模块化，而组件导入import和导出exports其实使用的是ES6新增的模块化语法 es6官网模块化语法：https:&amp;#x2F;&amp;#x2F;es6.ruanyifeng.com&amp;#x2F;#docs&amp;#x2F;module 谷歌浏览器测试ES6的模块化语法, 必须要使"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">ES6模块化与Webpack入门</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/webpack.jpg" alt="ES6模块化与Webpack入门"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/Vue前置基础/">Vue前置基础</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/"><span class="tags-name tags-punctuation">Vue前置基础</span></a></div></div></div></div><h1 class="post-title">ES6模块化与Webpack入门</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><p>vue将每一个组件看作是一个独立的模块 (类似于nodejs中的) 模块化，而组件导入<code>import</code>和导出<code>exports</code>其实使用的是ES6新增的模块化语法</p>
+<p>es6官网模块化语法：<a target="_blank" rel="noopener" href="https://es6.ruanyifeng.com/#docs/module">https://es6.ruanyifeng.com/#docs/module</a></p>
+<p>谷歌浏览器测试ES6的模块化语法, 必须要使用live-server插件运行index才可以</p>
+<h1 id="1-ES6模块化默认导入导出"><a href="#1-ES6模块化默认导入导出" class="headerlink" title="1. ES6模块化默认导入导出"></a>1. ES6模块化默认导入导出</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设置script标签type属性为module, 告诉浏览器文件使用了module语法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./1.ES6导入语法.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-ES6导入语法-import-xxx-from-‘xxx’"><a href="#1-ES6导入语法-import-xxx-from-‘xxx’" class="headerlink" title="1. ES6导入语法 import xxx from ‘xxx’"></a>1. ES6导入语法 import xxx from ‘xxx’</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 默认导入</span></span><br><span class="line"><span class="comment">// 导入语法会做两件事: 1.执行文件里的代码 2.得到文件里导出的对象</span></span><br><span class="line"><span class="keyword">import</span> data <span class="keyword">from</span> <span class="string">&#x27;./2.ES6导出语法.js&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 这种写法只会做一件事: 执行文件里的代码, 比如只想加载css代码</span></span><br><span class="line"><span class="comment">// import &#x27;./2.ES6导出语法.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-ES6导出语法-export-default"><a href="#2-ES6导出语法-export-default" class="headerlink" title="2. ES6导出语法 export default {}"></a>2. ES6导出语法 export default {}</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;小明&#x27;</span></span><br><span class="line"><span class="keyword">let</span> age = <span class="number">18</span></span><br><span class="line"><span class="keyword">let</span> sex = <span class="string">&#x27;男&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">11</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认导出: export default &#123;&#125;</span></span><br><span class="line"><span class="comment">// 注意点: 默认导出只能导出一次</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;name, age&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-ES6按需导入导出"><a href="#3-ES6按需导入导出" class="headerlink" title="3. ES6按需导入导出"></a>3. ES6按需导入导出</h2><ol>
+<li><code>export default</code> 和<code>export</code>可以在同一文件, 但是要分开导入。实际开发中不建议同时使用</li>
+<li>导入通过<code>export</code>导出的模块,名字有要求，如果是export导出，默认导入变量名要与导出的一致</li>
+<li>如果是<code>export default</code>，则变量名可以随便写</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 按需导入需 配套按需导出</span></span><br><span class="line"><span class="comment">// import &#123;变量名 as 别名&#125; from &#x27;文件路径&#x27;</span></span><br><span class="line"><span class="comment">// 按需导入的变量名要和导出变量名一致</span></span><br><span class="line"><span class="comment">// 变量名的 &#123;&#125; 是起解构作用</span></span><br><span class="line"><span class="comment">// 如果非要改名 则需加 as关键字</span></span><br><span class="line"><span class="keyword">import</span> &#123;a, b <span class="keyword">as</span> bb&#125; <span class="keyword">from</span> <span class="string">&#x27;./2.ES6导出语法.js&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, bb)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 按需导出: export let 变量名 = 值</span></span><br><span class="line"><span class="comment">// 注意点: 按需导出可以导出多次</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> a = <span class="string">&#x27;admin&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> b = <span class="string">&#x27;123&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="2-Webpack介绍"><a href="#2-Webpack介绍" class="headerlink" title="2. Webpack介绍"></a>2. Webpack介绍</h1><ol>
+<li>在实际开发中， 项目上线： 前端用webpack把我们项目代码进行打包，然后交给公司后台人员发布到服务器的过程, 官网：<a target="_blank" rel="noopener" href="https://webpack.docschina.org/">https://webpack.docschina.org/</a></li>
+<li><strong>webpack</strong> 是一个用于现代 JavaScript 应用程序的 <em>静态模块打包工具</em></li>
+<li>静态： 项目中的静态资源如css、图片等文件</li>
+<li>模块:   js文件（模块化开发中，一切js文件皆为模块）</li>
+<li>打包：主要帮你压缩代码，然后还会加密、混淆代码防止被人偷窥~</li>
+<li>打包还有一个意思： 就是会把你项目中很多个文件压缩成一个文件</li>
+<li>2.webpack作用: 分析、压缩、打包代码</li>
+<li>webpack好处: 减少文件体积、减少文件数量, 提高网页加载速度</li>
+</ol>
+<h1 id="3-Webpack基本使用流程"><a href="#3-Webpack基本使用流程" class="headerlink" title="3. Webpack基本使用流程"></a>3. Webpack基本使用流程</h1><h3 id="1-初始化npm-npm-init-y"><a href="#1-初始化npm-npm-init-y" class="headerlink" title="1. 初始化npm :  npm init -y"></a>1. 初始化npm :  npm init -y</h3><p>webpack是node环境中的一个工具类模块，它本身是基于nodejs的</p>
+<h3 id="2-使用node安装webpack"><a href="#2-使用node安装webpack" class="headerlink" title="2. 使用node安装webpack"></a>2. 使用node安装webpack</h3><p>安装命令： <code>npm i webpack webpack-cli -D</code></p>
+<p>-D含义： 相当于 –save-d , 将webpack作为开发依赖</p>
+<p>本地包 ：  不同的项目由于webpack版本不同，比如一些老版本项目可能用最新版的webpack无法打包。 因此不建议将webpack作为全局包安装</p>
+<p>检测是否安装成功: <code>npx webpack -v</code>, 这个命令其实就是检查你的node_module命令下面有没有webpack文件，有的话就读取这个文件里面的版本信息</p>
+<h3 id="3-在src文件夹中新建js文件-模块"><a href="#3-在src文件夹中新建js文件-模块" class="headerlink" title="3. 在src文件夹中新建js文件(模块)"></a>3. 在src文件夹中新建js文件(模块)</h3><p>webpack默认的打包文件入口目录是 <code>./src/index.js</code> , 因此必须要有src这个目录，而且还要有index.js ， 否则就会报错, 这个目录后期可以修改，但是我们需要先了解webapck默认是怎么操作的</p>
+<h3 id="4-在项目根目录下执行打包命令：-npx-webpack"><a href="#4-在项目根目录下执行打包命令：-npx-webpack" class="headerlink" title="4. 在项目根目录下执行打包命令： npx webpack"></a>4. 在项目根目录下执行打包命令： npx webpack</h3><ul>
+<li>1.webpack打包命名全称是:  <code>npx webpack js文件路径</code><ul>
+<li>  例如:  npm webpack ./src/xxx.js</li>
+<li>  如果没有写js文件路径,那么webpack就会自动打包项目根目录下的  <code>./src/index.js</code></li>
+</ul>
+</li>
+<li>2.当项目js代码发生变化时如何打包？<ul>
+<li>  重新执行打包命令即可</li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_h267TQgT9A.png"></p>
+<ul>
+<li>观察项目变化<ul>
+<li>  <code>webpack会把打包的js文件默认放入./dist/man.js</code></li>
+</ul>
+</li>
+<li>(1)为什么没有打包tools.js<ul>
+<li>  因为index.js文件中并没有去导入tools.js （没有形成依赖关系）</li>
+</ul>
+</li>
+<li>(2)如何才会打包tools.js<ul>
+<li>  在index.js中导入tools.js即可</li>
+</ul>
+</li>
+<li>(3)使用commonJS规范导入模块,观察  ./dist/man.js 变化<ul>
+<li>  <code>webpack同时支持commonjs模块化规范与ES6模块化规范，所以使用ES6模块化也是可以识别的哟！</code></li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_JH2JVjHWtB.png"></p>
+<h2 id="1-5-小结"><a href="#1-5-小结" class="headerlink" title="1.5-小结"></a>1.5-小结</h2><ul>
+<li>1.webpack打包流程分为哪三个步骤<ul>
+<li>  初始化npm :  npm init -y</li>
+<li>  下载安装webpack工具：npm i webpack webpack-cli -D</li>
+<li>  开始打包：npx webpack</li>
+</ul>
+</li>
+<li>2.默认webpack打包的<code>入口文件(需要压缩打包的文件)</code>是哪一个？<ul>
+<li>  ./src/index.js</li>
+</ul>
+</li>
+<li>3.默认webpack打包的<code>出口文件（压缩后的文件）</code>是哪一个<ul>
+<li>  ./dist/main.js</li>
+</ul>
+</li>
+<li>4.如何让webpack打包更多的文件<ul>
+<li>  在入口文件中,导入其他模块</li>
+<li>  <code>被打包的资源一定要和入口文件，形成间接或直接的依赖关系</code></li>
+</ul>
+</li>
+<li>5.webpack模块化默认支持哪一种规范？<ul>
+<li>comonJS规范<ul>
+<li>  导出使用 <code>module.exports</code></li>
+<li>  导入使用<code>require</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="04-Webpack配置文件"><a href="#04-Webpack配置文件" class="headerlink" title="04-Webpack配置文件"></a>04-Webpack配置文件</h1><blockquote>
+<p>​    webpack配置文件作用： 修改webpack默认的配置<br>例如，webpack默认的配置如下<br>打包命令： npx webpack<br>入口文件: ./src/index.js<br>出口文件: ./dist/main.js<br>通过修改webpack配置文件，可以将上面的一些默认配置全部修改掉。<br>如果把webpack比喻成一个人，那么配置文件就相当于人身上穿的衣服。 不同的人穿衣搭配风格不同。（不同的项目webpack配置是不相同的）</p>
+</blockquote>
+<h2 id="1-1-创建配置文件"><a href="#1-1-创建配置文件" class="headerlink" title="1.1-创建配置文件"></a>1.1-创建配置文件</h2><ul>
+<li>  在项目根目录下创建默认配置文件: <code>webpack.config.js</code></li>
+<li>  在配置文件中导出配置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">//自定义配置写在这里（对象键值对）</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-lazy-src="image/image_P6io3jHemX.png"></p>
+<h2 id="1-2-webpack常见配置作用"><a href="#1-2-webpack常见配置作用" class="headerlink" title="1.2-webpack常见配置作用"></a>1.2-webpack常见配置作用</h2><ul>
+<li>1.mode : 打包模式<ul>
+<li>  默认值production :  生产模式（压缩，混淆，加密……. 不可读）</li>
+<li>  development :开发模式(代码不会压缩 混淆)</li>
+</ul>
+</li>
+<li>2.output: 出口文件(对象类型)<ul>
+<li>path : 设置出口文件夹（必须是绝对路径）<ul>
+<li>  默认值:  <code>$&#123;__dirname&#125;/dist</code></li>
+</ul>
+</li>
+<li>filename: 设置出口js文件名 (相对于path路径)<ul>
+<li>  默认值: <code>main.js</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3.entry : 出口文件<ul>
+<li>  默认值(相当于项目根目录): <code>./src/index.js</code></li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_kX0n0Uge8Y.png"></p>
+<h2 id="1-3-webpack其他配置"><a href="#1-3-webpack其他配置" class="headerlink" title="1.3-webpack其他配置"></a>1.3-webpack其他配置</h2><p><strong>注意：这个配置是写在package.json文件中的script对象里面</strong></p>
+<ul>
+<li>“build” : “webpack”<ul>
+<li>相当于是给你的当前项目新增了一个命令: <code>npm run build</code><ul>
+<li>  这个命令等价于<code>npx webpack</code>, 只是额外新增了一个命令。 原来的默认命令还是可以用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>“dev”</em>: “webpack –config webpack.dev.js”<ul>
+<li>相当于给你的当前项目新增了一个命令 ： <code>npm run dev</code><ul>
+<li>  这个命令将不再使用默认的配置文件webpack.config.js, 而是使用自定义配置文件 webpack.dev.js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意点<ul>
+<li>  如果使用<code>npm run build</code> : 还是用默认配置文件来配置你的webpack</li>
+<li>如果使用<code>npm run dev</code> : 就会使用自定义配置文件来配置你的webpack<ul>
+<li>这个命令相当于<code>npx webpack --config webpack.dev.js</code><ul>
+<li>  npx webpack –你的配置文件 ： 用自定义配置文件打包webpack</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_hfcVoxP_nE.png"></p>
+<h2 id="1-4-小节：-npm-run-build-原理流程"><a href="#1-4-小节：-npm-run-build-原理流程" class="headerlink" title="1.4-小节：  npm run build 原理流程"></a>1.4-小节：  npm run build 原理流程</h2><p><img data-lazy-src="image/image_pMk8YDXa5l.png"></p>
+<h1 id="05-Webpack插件与加载器使用"><a href="#05-Webpack插件与加载器使用" class="headerlink" title="05-Webpack插件与加载器使用"></a>05-Webpack插件与加载器使用</h1><blockquote>
+<p>​    默认情况下, webpack只能处理js或json文件。 但是项目中不仅仅有js文件，还有其他一些资源文件如：css、html、图片等</p>
+</blockquote>
+<ul>
+<li>插件作用 ： 给webpack添加额外的功能<ul>
+<li>加载器（loader） :  让webpack识别编译更多的文件（如css、less、图片等等）<ul>
+<li>  webpack中一切文件都是加载器</li>
+</ul>
+</li>
+<li>  其他插件（plugin）： 额外功能(如浏览器兼容性)</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-1-处理html文件插件：html-webpack-plugin"><a href="#1-1-处理html文件插件：html-webpack-plugin" class="headerlink" title="1.1-处理html文件插件：html-webpack-plugin"></a>1.1-处理html文件插件：html-webpack-plugin</h2><ul>
+<li>  官网：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/html-webpack-plugin" title="https://www.npmjs.com/package/html-webpack-plugin"><strong>https://www.npmjs.com/package/html-webpack-plugin</strong></a></li>
+<li>  1.下载插件: <code>npm i html-webpack-plugin -D</code></li>
+<li>  这个插件只是开发用到，发布用不到。 因此一般作为开发依赖</li>
+<li>2.配置插件 ： 两件事<ul>
+<li>在 webpack.config.js中导入插件<ul>
+<li>  <code>const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;)</code></li>
+</ul>
+</li>
+<li>在 plugins中配置插件(不同的插件需要去官网找具体配置项)  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4.插件配置</span></span><br><span class="line"><span class="attr">plugins</span>: [</span><br><span class="line">       <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123; <span class="comment">// 打包输出HTML</span></span><br><span class="line">            <span class="attr">minify</span>: &#123; <span class="comment">// 压缩HTML文件</span></span><br><span class="line">                <span class="attr">removeComments</span>: <span class="literal">true</span>, <span class="comment">// 移除HTML中的注释</span></span><br><span class="line">                <span class="attr">collapseWhitespace</span>: <span class="literal">true</span>, <span class="comment">// 删除空白符与换行符</span></span><br><span class="line">                <span class="attr">minifyCSS</span>: <span class="literal">true</span><span class="comment">// 压缩内联css</span></span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">template</span>: <span class="string">`./public/index.html`</span> <span class="comment">// 指定压缩哪一个html文件, 相对于根目录</span></span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_xZU0_WgbkT.png"></p>
+<p><img data-lazy-src="image/image_Qn2la8RdhH.png"></p>
+<h2 id="1-2-处理css文件加载器"><a href="#1-2-处理css文件加载器" class="headerlink" title="1.2-处理css文件加载器"></a>1.2-处理css文件加载器</h2><h3 id="1-2-1-前置知识储备：css文件模块化语法"><a href="#1-2-1-前置知识储备：css文件模块化语法" class="headerlink" title="1.2.1-前置知识储备：css文件模块化语法"></a>1.2.1-前置知识储备：css文件模块化语法</h3><blockquote>
+<p>​    前置知识点 :  之前都是通过link标签的href属性来导入css文件，那么在模块化语法中如何导入css呢</p>
+</blockquote>
+<ul>
+<li>在一个css文件中导入另一个css文件（与less导入语法类似）<ul>
+<li><code>@import &quot;css文件名&quot;;</code><ul>
+<li>  特别注意后面那个分号哟，那是css的语法规范</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_RmAtNer4k8.png"></p>
+<ul>
+<li>在js文件中导入css文件<ul>
+<li><code>improt &quot;css文件名&quot;</code><ul>
+<li>  <strong>后期vue项目也是用这种语法在js文件中导入css哟：</strong><a target="_blank" rel="noopener" href="https://element.eleme.cn/#/zh-CN/component/quickstart#wan-zheng-yin-ru" title="https://element.eleme.cn/#/zh-CN/component/quickstart#wan-zheng-yin-ru"><strong>https://element.eleme.cn/#/zh-CN/component/quickstart#wan-zheng-yin-ru</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_XpRudIA7d0.png"></p>
+<h3 id="1-2-2-下载插件"><a href="#1-2-2-下载插件" class="headerlink" title="1.2.2-下载插件"></a>1.2.2-下载插件</h3><ul>
+<li><code>npm i css-loader -D</code><ul>
+<li>  开发依赖： 这个插件是让webpack可以识别css文件（因为webpack默认只识别js文件）</li>
+</ul>
+</li>
+<li><code>npm i style-loader -D</code><ul>
+<li>  开发依赖：这个插件是让webpack在打包的时候，把样式插入到html文件中</li>
+</ul>
+</li>
+<li>  简单的说： css-loader是为了webpack能够识别并打包css文件的， style-loader是为了能让你的css文件最终在html中渲染的（底层是在html文件的head中生成style把样式插入进去）</li>
+</ul>
+<h3 id="1-2-3-配置插件"><a href="#1-2-3-配置插件" class="headerlink" title="1.2.3-配置插件"></a>1.2.3-配置插件</h3><blockquote>
+<p>​    webpack中大多数插件都是要在配置文件中，配置之后才会生效的哟！<br>官网地址：<a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/css-loader/" title="https://webpack.docschina.org/loaders/css-loader/">https://webpack.docschina.org/loaders/css-loader/</a></p>
+</blockquote>
+<ul>
+<li>  在webpack.config.json中配置css插件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 5.加载器</span></span><br><span class="line"><span class="attr">module</span>:&#123; <span class="comment">// 处理非js模块</span></span><br><span class="line">    <span class="attr">rules</span>:[ <span class="comment">// 规则</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,     <span class="comment">// 正则测试</span></span><br><span class="line">        <span class="attr">use</span>: [<span class="string">&#x27;style-loader&#x27;</span>,<span class="string">&#x27;css-loader&#x27;</span>]   <span class="comment">// loader</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-lazy-src="image/image_C28IxueqoE.png"></p>
+<h2 id="1-3-处理less文件加载器"><a href="#1-3-处理less文件加载器" class="headerlink" title="1.3-处理less文件加载器"></a>1.3-处理less文件加载器</h2><blockquote>
+<p>​    在实际开发中，并不是所有的项目样式都会用css语法来写的。 有的项目会用less语法来写样式。 而且这种场景也是很多的。</p>
+</blockquote>
+<ul>
+<li>  官网：<a target="_blank" rel="noopener" href="https://webpack.docschina.org/loaders/less-loader/" title="https://webpack.docschina.org/loaders/less-loader/">https://webpack.docschina.org/loaders/less-loader/</a></li>
+<li>1.下载插件： <code>npm i less-loader less -D</code><ul>
+<li>开发依赖： 这个命令其实是一次性下载两个插件<ul>
+<li>less插件：把你的less语法转成css语法<ul>
+<li>  相当于之前vscode那个easyless插件作用</li>
+</ul>
+</li>
+<li>  less-loader插件：让webpack可以识别less文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>  2.配置插件(注意书写位置，别写错位置了哈。写在刚才css加载器配置下面)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,     <span class="comment">// 正则匹配，以.less结尾的文件</span></span><br><span class="line">    <span class="comment">// 如果发现是.less文件，则由如下三个loader来处理</span></span><br><span class="line">    <span class="comment">// 处理的顺序是   从右向左</span></span><br><span class="line">    <span class="comment">// less-loader: 作用是加载less文件，会帮你less转成css</span></span><br><span class="line">    <span class="comment">// css-loader: 作用是允许.js中引入.css</span></span><br><span class="line">    <span class="comment">// style-loader:作用是在.html上创建style标签，把css代码输入进去</span></span><br><span class="line">    <span class="attr">use</span>: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;less-loader&#x27;</span>] <span class="comment">// 匹配成功，使用指定的loader</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-lazy-src="image/image_649N9WQywK.png"></p>
+<ul>
+<li>3.自己随便写个less文件测试一下吧。<ul>
+<li>  <strong>记得把index.js、index.less里面导包的之后，之前那个css后缀改成less后缀哟</strong></li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_L_bn6MfR2B.png"></p>
+<h2 id="1-4-处理图片文件加载器-webpack自带"><a href="#1-4-处理图片文件加载器-webpack自带" class="headerlink" title="1.4-处理图片文件加载器(webpack自带)"></a>1.4-处理图片文件加载器(webpack自带)</h2><h3 id="1-4-1-处理文件文件配置"><a href="#1-4-1-处理文件文件配置" class="headerlink" title="1.4.1-处理文件文件配置"></a>1.4.1-处理文件文件配置</h3><ul>
+<li>处理图片资源，webpack老版本需要装插件， 新版本自带插件(5之后版本)，无需安装<ul>
+<li>  官网介绍：<a target="_blank" rel="noopener" href="https://webpack.docschina.org/guides/asset-modules/" title="https://webpack.docschina.org/guides/asset-modules/">https://webpack.docschina.org/guides/asset-modules/</a></li>
+</ul>
+</li>
+<li>在配置文件中配置图片文件  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.(png|jpg|gif|jpeg)$/i</span>, <span class="comment">// 匹配图片文件</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;asset&#x27;</span> <span class="comment">// 在导出一个 data URI 和一个单独的文件之间自动选择</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img data-lazy-src="image/image_YnWjpwL6a4.png"></p>
+<h3 id="1-4-2-前置知识储备：-模块化语法如何使用图片"><a href="#1-4-2-前置知识储备：-模块化语法如何使用图片" class="headerlink" title="1.4.2-前置知识储备： 模块化语法如何使用图片"></a>1.4.2-前置知识储备： 模块化语法如何使用图片</h3><blockquote>
+<p>​    页面的图片文件有两种加载模式<br>第一种： 作为css样式背景图<br>第二种：作为img标签的src属性</p>
+</blockquote>
+<p><img data-lazy-src="image/image_z_ry8m8MZ6.png"></p>
+<ul>
+<li>模块化导入图片<ul>
+<li>import 变量名 from ‘图片路径’<ul>
+<li>  这个原理有点类似于之前ajax讲过的文件预览，先将图片文件生成一个本地url，然后显示到img标签上</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_76VNJvMzS5.png"></p>
+<h3 id="1-4-3-图片压缩规则"><a href="#1-4-3-图片压缩规则" class="headerlink" title="1.4.3-图片压缩规则"></a>1.4.3-图片压缩规则</h3><p><img data-lazy-src="image/image_yCcZnmPzMQ.png"></p>
+<ul>
+<li>  给页面添加两个img标签，分别导入两张图片（一大一小，然后观察页面）</li>
+</ul>
+<p><img data-lazy-src="image/image_g5gdXtiuRE.png"></p>
+<h2 id="1-5-其他插件与加载器-课后了解"><a href="#1-5-其他插件与加载器-课后了解" class="headerlink" title="1.5-其他插件与加载器(课后了解)"></a>1.5-其他插件与加载器(课后了解)</h2><h3 id="1-5-1-自动清理目录插件"><a href="#1-5-1-自动清理目录插件" class="headerlink" title="1.5.1-自动清理目录插件"></a>1.5.1-自动清理目录插件</h3><ul>
+<li>1.自动清理目录插件：clean-webpack-plugin<ul>
+<li>作用描述： 每一次我们打包的之后，因为上一次打包页面看着不舒服。 喜欢把之前的文件给删掉。  这样就可以确保本次打包一定是最新的打包文件。<ul>
+<li>  这个插件就是每一次打包的时候自动帮你清理上一次打包的文件目录（用起来之后，我们看不到实际变化，就是一个心理作用。 它帮你把之前打包的文件先删除了，然后再生成本次打包文件）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>  2.安装：<code>npm i clean-webpack-plugin -D</code></li>
+<li>3.配置(webpack.config.js)<ul>
+<li>  先导入: <code>const &#123; CleanWebpackPlugin &#125; = require(&#39;clean-webpack-plugin&#39;)</code></li>
+<li>在plugins配置  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">plugins</span>:[</span><br><span class="line">   <span class="keyword">new</span> <span class="title class_">CleanWebpackPlugin</span>()，</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-2-字体图标-自带插件-配置即可"><a href="#1-5-2-字体图标-自带插件-配置即可" class="headerlink" title="1.5.2-字体图标(自带插件,配置即可)"></a>1.5.2-字体图标(自带插件,配置即可)</h3><ul>
+<li>这是webpack自带插件（跟图片文件差不多）：<ul>
+<li>  <strong>官网：</strong><a target="_blank" rel="noopener" href="https://www.webpackjs.com/loaders/less-loader/#%E5%AE%89%E8%A3%85" title="https://www.webpackjs.com/loaders/less-loader/#%E5%AE%89%E8%A3%85"><strong>https://www.webpackjs.com/loaders/less-loader/#%E5%AE%89%E8%A3%85</strong></a></li>
+</ul>
+</li>
+</ul>
+<p><img data-lazy-src="image/image_0aqL-TdscT.png"></p>
+<h1 id="06-webpack服务器开发"><a href="#06-webpack服务器开发" class="headerlink" title="06-webpack服务器开发"></a>06-webpack服务器开发</h1><blockquote>
+<p>大家有没有发现： 我们每一次修改代码，都需要重新打包才能看到效果？<br>​        类似于前端：每一次修改代码，都需要重新刷新页面才能生效<br>​        类似于nodejs:每一次修改代码，都需要重新执行node命令才能生效<br>那么webpack有没有那种，一敲代码自动打包的工具呢？<br>​        类似于前端live-server : 一敲代码，页面自动更新<br>​       类似于nodejs的nodemon : 一敲代码，自动重启服务器<br>那必须有啊！！！</p>
+</blockquote>
+<ul>
+<li>  webpack-dev-server配置文档: <a target="_blank" rel="noopener" href="https://webpack.docschina.org/configuration/dev-server/#devserverafter" title="https://webpack.docschina.org/configuration/dev-server/#devserverafter">https://webpack.docschina.org/configuration/dev-server/#devserverafter</a></li>
+<li>  1.安装插件：<code>npm i webpack-dev-server  -D</code></li>
+<li>  2.配置插件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,  <span class="comment">// 配置启动ip地址</span></span><br><span class="line">    <span class="attr">port</span>: <span class="number">3000</span>,  <span class="comment">// 配置端口</span></span><br><span class="line">    <span class="attr">open</span>: <span class="literal">true</span>  <span class="comment">// 配置是否自动打开浏览器</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-lazy-src="image/image_eZMj5EH0nC.png"></p>
+<ul>
+<li>  3.配置package.json文件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;webpack-dev-server&quot;</span>,  </span><br><span class="line">   <span class="comment">// 它默认会找webpack.config.js文件</span></span><br><span class="line">   </span><br><span class="line">   <span class="string">&quot;build&quot;</span>: <span class="string">&quot;webpack-dev-server --config  webpack.config.js&quot;</span> </span><br><span class="line">    <span class="comment">// 指定使用webpack.config.js配置文件文件</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>4.启动服务器: <code>npm run dev</code><ul>
+<li>  <code>webpack实时打包、实时编译、实时浏览器查看效果，一条龙服务到位</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="webpack学习总结-面试题"><a href="#webpack学习总结-面试题" class="headerlink" title="webpack学习总结(面试题)"></a>webpack学习总结(面试题)</h1><ul>
+<li>1.什么是webpack<ul>
+<li>  <em>静态模块打包工具</em></li>
+</ul>
+</li>
+<li>2.webpack作用<ul>
+<li>  分析、压缩、打包代码</li>
+</ul>
+</li>
+<li>3.webpack好处<ul>
+<li>  减少文件体积、减少文件数量</li>
+<li>  提高网页加载速度</li>
+</ul>
+</li>
+<li>4.webpack工作流程<ul>
+<li>  1.初始化参数：从配置文件读取与合并参数，得出最终的参数</li>
+<li>  2.开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，开始执行编译</li>
+<li>  3.确定入口：根据配置中的 entry 找出所有的入口文件</li>
+<li>  4.编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理</li>
+<li>  5.完成模块编译：在经过第4步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系</li>
+<li>  6.输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会</li>
+<li>  7。输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。</li>
+</ul>
+</li>
+<li>5.什么是loader，什么是Plugin<ul>
+<li>loader直译为”加载器”。webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件也打包的话，就会用到loader。 所以loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。<ul>
+<li>说人话： loader就是用于解析文件的<ul>
+<li>  例如：css-loader 、style-loader、image-loader</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Plugin直译为”插件”。Plugin可以扩展webpack的功能，让webpack具有更多的灵活性。 在 webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 webpack 提供的 API 改变输出结果。<ul>
+<li>说人话：插件就是拓展功能的<ul>
+<li>  例如：html-webpack-plugin,</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,     <span class="comment">// 正则匹配，以.less结尾的文件</span></span><br><span class="line">    <span class="comment">// 如果发现是.less文件，则由如下三个loader来处理</span></span><br><span class="line">    <span class="comment">// 处理的顺序是   从右向左</span></span><br><span class="line">    <span class="comment">// less-loader: 作用是加载less文件，会帮你less转成css</span></span><br><span class="line">    <span class="comment">// css-loader: 作用是允许.js中引入.css</span></span><br><span class="line">    <span class="comment">// style-loader:作用是在.html上创建style标签，把css代码输入进去</span></span><br><span class="line">    <span class="attr">use</span>: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;less-loader&#x27;</span>] <span class="comment">// 匹配成功，使用指定的loader</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/"><span class="tags-punctuation"></span>Vue前置基础<span class="tagsPageCount">5</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Vue%E7%AC%94%E8%AE%B0/vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue框架笔记</div></div></a></div><div class="next-post pull-right"><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/1.Vue%E5%89%8D%E7%BD%AEJS%E5%8A%9F%E5%BA%95"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vue前置JS功底</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/1.Vue%E5%89%8D%E7%BD%AEJS%E5%8A%9F%E5%BA%95" title="Vue前置JS功底"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc/cover/js1.webp" alt="cover"><div class="content is-center"><div class="title">Vue前置JS功底</div></div></a></div><div><a href="/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/4.%E8%B7%A8%E5%9F%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5" title="跨域的基本概念"><img class="cover" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/跨域.jpg" alt="cover"><div class="content is-center"><div class="title">跨域的基本概念</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-ES6%E6%A8%A1%E5%9D%97%E5%8C%96%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-text">1. ES6模块化默认导入导出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ES6%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95-import-xxx-from-%E2%80%98xxx%E2%80%99"><span class="toc-text">1. ES6导入语法 import xxx from ‘xxx’</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-ES6%E5%AF%BC%E5%87%BA%E8%AF%AD%E6%B3%95-export-default"><span class="toc-text">2. ES6导出语法 export default {}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-ES6%E6%8C%89%E9%9C%80%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA"><span class="toc-text">3. ES6按需导入导出</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Webpack%E4%BB%8B%E7%BB%8D"><span class="toc-text">2. Webpack介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Webpack%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">3. Webpack基本使用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96npm-npm-init-y"><span class="toc-text">1. 初始化npm :  npm init -y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8node%E5%AE%89%E8%A3%85webpack"><span class="toc-text">2. 使用node安装webpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9C%A8src%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%AD%E6%96%B0%E5%BB%BAjs%E6%96%87%E4%BB%B6-%E6%A8%A1%E5%9D%97"><span class="toc-text">3. 在src文件夹中新建js文件(模块)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%9C%A8%E9%A1%B9%E7%9B%AE%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%A7%E8%A1%8C%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%EF%BC%9A-npx-webpack"><span class="toc-text">4. 在项目根目录下执行打包命令： npx webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E5%B0%8F%E7%BB%93"><span class="toc-text">1.5-小结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#04-Webpack%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">04-Webpack配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.1-创建配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-webpack%E5%B8%B8%E8%A7%81%E9%85%8D%E7%BD%AE%E4%BD%9C%E7%94%A8"><span class="toc-text">1.2-webpack常见配置作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-webpack%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="toc-text">1.3-webpack其他配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%B0%8F%E8%8A%82%EF%BC%9A-npm-run-build-%E5%8E%9F%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-text">1.4-小节：  npm run build 原理流程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#05-Webpack%E6%8F%92%E4%BB%B6%E4%B8%8E%E5%8A%A0%E8%BD%BD%E5%99%A8%E4%BD%BF%E7%94%A8"><span class="toc-text">05-Webpack插件与加载器使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E5%A4%84%E7%90%86html%E6%96%87%E4%BB%B6%E6%8F%92%E4%BB%B6%EF%BC%9Ahtml-webpack-plugin"><span class="toc-text">1.1-处理html文件插件：html-webpack-plugin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%A4%84%E7%90%86css%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">1.2-处理css文件加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E5%82%A8%E5%A4%87%EF%BC%9Acss%E6%96%87%E4%BB%B6%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%AD%E6%B3%95"><span class="toc-text">1.2.1-前置知识储备：css文件模块化语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E4%B8%8B%E8%BD%BD%E6%8F%92%E4%BB%B6"><span class="toc-text">1.2.2-下载插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="toc-text">1.2.3-配置插件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%A4%84%E7%90%86less%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">1.3-处理less文件加载器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E5%A4%84%E7%90%86%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E5%99%A8-webpack%E8%87%AA%E5%B8%A6"><span class="toc-text">1.4-处理图片文件加载器(webpack自带)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-1-%E5%A4%84%E7%90%86%E6%96%87%E4%BB%B6%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-text">1.4.1-处理文件文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-2-%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E5%82%A8%E5%A4%87%EF%BC%9A-%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%AD%E6%B3%95%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%9B%BE%E7%89%87"><span class="toc-text">1.4.2-前置知识储备： 模块化语法如何使用图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-3-%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E8%A7%84%E5%88%99"><span class="toc-text">1.4.3-图片压缩规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E5%85%B6%E4%BB%96%E6%8F%92%E4%BB%B6%E4%B8%8E%E5%8A%A0%E8%BD%BD%E5%99%A8-%E8%AF%BE%E5%90%8E%E4%BA%86%E8%A7%A3"><span class="toc-text">1.5-其他插件与加载器(课后了解)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-1-%E8%87%AA%E5%8A%A8%E6%B8%85%E7%90%86%E7%9B%AE%E5%BD%95%E6%8F%92%E4%BB%B6"><span class="toc-text">1.5.1-自动清理目录插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-2-%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87-%E8%87%AA%E5%B8%A6%E6%8F%92%E4%BB%B6-%E9%85%8D%E7%BD%AE%E5%8D%B3%E5%8F%AF"><span class="toc-text">1.5.2-字体图标(自带插件,配置即可)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#06-webpack%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91"><span class="toc-text">06-webpack服务器开发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93-%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">webpack学习总结(面试题)</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

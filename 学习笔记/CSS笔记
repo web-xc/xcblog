@@ -1,0 +1,413 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CSS笔记 | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="CSS笔记link rel&amp;#x3D;”stylesheet” href&amp;#x3D;”文件名”margin:0px auto;（块级元素居中）和width：的组合写2个数：第一个代表上下，第二个代表左右写3个数:第一个代表上，第二个代表左右,第三个下写4个数：上，右，下,左text-align:center；（行级元素"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">CSS笔记</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://npm.elemecdn.com/webxc@1.0.0/cover/css1.jpg" alt="CSS笔记"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/前端经验/">前端经验</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/"><span class="tags-name tags-punctuation">前端经验</span></a></div></div></div></div><h1 class="post-title">CSS笔记</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><h3 id="CSS笔记"><a href="#CSS笔记" class="headerlink" title="CSS笔记"></a>CSS笔记</h3><p>link rel=”stylesheet” href=”文件名”<br>margin:0px auto;（块级元素居中）和width：的组合<br>写2个数：第一个代表上下，第二个代表左右<br>写3个数:第一个代表上，第二个代表左右,第三个下<br>写4个数：上，右，下,左<br>text-align:center；（行级元素居中）<br>list-style：none （去除符号）<br>clear：both（去除浮动）<br>overflow:hidden;(超过大小就不显示)<br>overflow:scroll  滚动条<br>border:none;outline:none;去除按钮边框</p>
+<h3 id="li-nth-child-1-：第一个"><a href="#li-nth-child-1-：第一个" class="headerlink" title="li:nth-child(1)：第一个"></a>li:nth-child(1)：第一个</h3><p>transform：移动、旋转、倾斜、3D转换<br>none<br>定义不进行转换。<br>translate(x,y)<br>定义 2D 转换。<br>translate3d(x,y,z)<br>定义 3D 转换。<br>translateX(x)<br>定义转换，只是用 X 轴的值。<br>translateY(y)<br>定义转换，只是用 Y 轴的值。<br>translateZ(z)<br>定义 3D 转换，只是用 Z 轴的值。<br>scale(x,y)<br>定义 2D 缩放转换。<br>scale3d(x,y,z)<br>定义 3D 缩放转换。<br>scaleX(x)<br>通过设置 X 轴的值来定义缩放转换。<br>scaleY(y)<br>通过设置 Y 轴的值来定义缩放转换。<br>scaleZ(z)<br>通过设置 Z 轴的值来定义 3D 缩放转换。<br>rotate(angle)<br>定义 2D 旋转，在参数中规定角度。<br>rotate3d(x,y,z,angle)<br>定义 3D 旋转。<br>rotateX(angle)<br>定义沿着 X 轴的 3D 旋转。<br>rotateY(angle)<br>定义沿着 Y 轴的 3D 旋转。<br>rotateZ(angle)<br>定义沿着 Z 轴的 3D 旋转。<br>skew(x-angle,y-angle)<br>定义沿着 X 和 Y 轴的 2D 倾斜转换。<br>skewX(angle)<br>定义沿着 X 轴的 2D 倾斜转换。<br>skewY(angle)<br>定义沿着 Y 轴的 2D 倾斜转换。<br>perspective(n)</p>
+<h3 id="为-3D-转换元素定义透视视图"><a href="#为-3D-转换元素定义透视视图" class="headerlink" title="为 3D 转换元素定义透视视图"></a>为 3D 转换元素定义透视视图</h3><p>transition  2s 简写属性，用于在一个属性中设置四个过渡属性。<br>transition-property：all background  width height  规定应用过渡的 CSS 属性的名称。<br>transition-duration  2s   定义过渡效果花费的时间。默认是 0。<br>transition-timing-function    规定过渡效果的时间曲线。默认是 “ease”。<br>transition-delay      规定过渡效果何时开始。默认是 0。<br>伪类选择器：hover<br>display:none 隐藏<br>display:block 显示<br>placeholder：显示内容点击就会删除<br>values：显示内容点击不会删除<br>cursor:pointer（鼠标移动位置变成小手）<br>opacity:0.2(透明度)<br>tansform:rotate(180deg):旋转<br>border-radius:50% 设置边框的角度<br>border-radius: 60px 0 0 60px;左半圆<br>border-radius: 0 0 0 60px;扇形 border-radius: 60px 60px 0 60px;花瓣<br>border-radius: 50px;胶囊</p>
+<h3 id="border-radius-80px-50px-椭圆"><a href="#border-radius-80px-50px-椭圆" class="headerlink" title="border-radius: 80px/50px;椭圆"></a>border-radius: 80px/50px;椭圆</h3><p>盒子模型：<br>margin:盒子与盒子之间的距离 padding：文字到边框的距离<br>contenr：具体内容的大小<br>行级元素要设置浮动才有效果</p>
+<p>文本属性：<br>给标题添加阴影: text-shadow: 5px 5px 5px #FF0000;<br> 属性适用于盒子阴影：box-shadow: 10px 10px 5px #888888;<br>text-overflow:省略文本溢出<br>overflow:hidden;(超过大小就不显示)<br>word-wrap：自动换行<br>word-break：字的断开<br>line-height：行高（与height使用可以让文字垂直居中）<br>text-align：对齐（center文字水平居中）  行级元素<br>letter-spacing：字符间距（空隙）<br>text-decoration：文本修饰（nono去除下划线、underline(加下划线)line-ovrline（上方加下划线）、line-through（中间加下划线））</p>
+<p>字体属性：<br>font-weight： 粗细 bold(加粗)<br>font-size：30px 大小<br>font-family：”宋体” 字体样式<br>Color：字体颜色<br>边框属性：<br>border-radius：50% 边框圆角<br>box-shadow:边框阴影<br>border-image:边框图像</p>
+<p>背景设置<br> background-image: linear-gradient(to right, red , yellow);线性渐变<br>background-color:背景颜色<br>background-image:url(“图片路径”):背景图片<br>background-repeat:(no-repeat):不重复 repeat-x(x轴重复) repeat-y(y轴重复)<br>background-position:（x,y）设置背景的坐标，偏移量</p>
+<p>定位布局(position：)<br>position：static:静态定位 (没有改变他们的位置，内容按照从上到下，从左到右进行布局）<br>position：relative：相对定位（相对于元素页面本身位置偏移）<br>position：absolute：绝对定位 （相对于父容器位置进行偏移） 父容器加 positon:relative 会脱离标准文档流<br>position：fixed：固定定位 做广告栏  (相对于body进行偏移)</p>
+<p>清除浮动踏陷：父容器加高度<br>overflow：hidden：大于我的内容会被隐藏掉<br>行级元素转为块级元素，块级元素转为行级元素。隐藏内容<br>display：block（块级元素） inline（行级元素） none（隐藏） inline-block:将行级元素转为一行显示的块级元素<br>行级元素：没有宽和高</p>
+<hr>
+<h3 id="CSS整理版"><a href="#CSS整理版" class="headerlink" title="CSS整理版"></a>CSS整理版</h3><p>大小 {font-size: x-large;}(特大) xx-small;(极小) 一般中文用不到，只要用数值就可以，单位：PX、PD</p>
+<p>样式 {font-style: oblique;}(偏斜体) italic;(斜体) normal;(正常)</p>
+<p>行高 {line-height: normal;}(正常) 单位：PX、PD、EM</p>
+<p>粗细 {font-weight: bold;}(粗体) lighter;(细体) normal;(正常)</p>
+<p>变体 {font-variant: small-caps;}(小型大写字母) normal;(正常)</p>
+<p>大小写 {text-transform: capitalize;}(首字母大写) uppercase;(大写) lowercase;(小写) none;(无)</p>
+<p>修饰 {text-decoration: underline;}(下划线) overline;(上划线) line-through;(删除线) blink;(闪烁)</p>
+<p>常用字体： (font-family)</p>
+<p>“Courier New”, Courier, monospace, “Times New Roman”, Times, serif, Arial, Helvetica, sans-serif, Verdana</p>
+<p>背景属性： (background)</p>
+<p>色彩 {background-color: #FFFFFF;}</p>
+<p>图片 {background-image: url();}</p>
+<p>重复 {background-repeat: no-repeat;}</p>
+<p>滚动 {background-attachment: fixed;}(固定) scroll;(滚动)</p>
+<p>位置 {background-position: left;}(水平) top(垂直);</p>
+<p>简写方法 {background:#000 url(..) repeat fixed left top;} /<em>简写·这个在阅读代码中经常出现，要认真的研究</em>/</p>
+<p>区块属性： (Block) /<em>这个属性第一次认识，要多多研究</em>/</p>
+<p>字间距 {letter-spacing: normal;} 数值 /<em>这个属性似乎有用，多实践下</em>/</p>
+<p>对齐 {text-align: justify;}(两端对齐) left;(左对齐) right;(右对齐) center;(居中)</p>
+<p>缩进 {text-indent: 数值px;}</p>
+<p>垂直对齐 {vertical-align: baseline;}(基线) sub;(下标) super;(下标) top; text-top; middle; bottom; text-bottom;</p>
+<p>词间距word-spacing: normal; 数值</p>
+<p>空格white-space: pre;(保留) nowrap;(不换行)</p>
+<p>显示 {display:block;}(块) inline;(内嵌) list-item;(列表项) run-in;(追加部分) compact;(紧凑) marker;(标记) table; inline-table; table-raw-group; table-header-group; table-footer-group; table-raw; table-column-group; table-column; table-cell; table-caption;(表格标题) /<em>display 属性的了解很模糊</em>/</p>
+<p>方框属性： (Box)</p>
+<p>width:; height:; float:; clear:both; margin:; padding:; 顺序：上右下左</p>
+<p>边框属性： (Border)</p>
+<p>border-style: dotted;(点线) dashed;(虚线) solid; double;(双线) groove;(槽线) ridge;(脊状) inset;(凹陷) outset;</p>
+<p>border-width:; 边框宽度</p>
+<p>border-color:#;</p>
+<p>简写方法border：width style color; /<em>简写</em>/</p>
+<p>列表属性： (List-style)</p>
+<p>类型list-style-type: disc;(圆点) circle;(圆圈) square;(方块) decimal;(数字) lower-roman;(小罗码数字) upper-roman; lower-alpha; upper-alpha;</p>
+<p>位置list-style-position: outside;(外) inside;</p>
+<p>图像list-style-image: url(..);</p>
+<p>定位属性： (Position)</p>
+<p>Position: absolute; relative; static;</p>
+<p>visibility: inherit; visible; hidden;</p>
+<p>overflow: visible; hidden; scroll; auto;</p>
+<p>clip: rect(12px,auto,12px,auto) (裁切)</p>
+<p>css属性代码大全</p>
+<p>一 CSS文字属性：</p>
+<p>color : #999999; /<em>文字颜色</em>/</p>
+<p>font-family : 宋体,sans-serif; /<em>文字字体</em>/</p>
+<p>font-size : 9pt; /<em>文字大小</em>/</p>
+<p>font-style:itelic; /<em>文字斜体</em>/</p>
+<p>font-variant:small-caps; /<em>小字体</em>/</p>
+<p>letter-spacing : 1pt; /<em>字间距离</em>/</p>
+<p>line-height : 200%; /<em>设置行高</em>/</p>
+<p>font-weight:bold; /<em>文字粗体</em>/</p>
+<p>vertical-align:sub; /<em>下标字</em>/</p>
+<p>vertical-align:super; /<em>上标字</em>/</p>
+<p>text-decoration:line-through; /<em>加删除线</em>/</p>
+<p>text-decoration: overline; /<em>加顶线</em>/</p>
+<p>text-decoration:underline; /<em>加下划线</em>/</p>
+<p>text-decoration:none; /<em>删除链接下划线</em>/</p>
+<p>text-transform : capitalize; /<em>首字大写</em>/</p>
+<p>text-transform : uppercase; /<em>英文大写</em>/</p>
+<p>text-transform : lowercase; /<em>英文小写</em>/</p>
+<p>text-align:right; /<em>文字右对齐</em>/</p>
+<p>text-align:left; /<em>文字左对齐</em>/</p>
+<p>text-align:center; /<em>文字居中对齐</em>/</p>
+<p>text-align:justify; /<em>文字分散对齐</em>/</p>
+<p>vertical-align属性</p>
+<p>vertical-align:top; /<em>垂直向上对齐</em>/</p>
+<p>vertical-align:bottom; /<em>垂直向下对齐</em>/</p>
+<p>vertical-align:middle; /<em>垂直居中对齐</em>/</p>
+<p>vertical-align:text-top; /<em>文字垂直向上对齐</em>/</p>
+<p>vertical-align:text-bottom; /<em>文字垂直向下对齐</em>/</p>
+<p>二、CSS边框空白</p>
+<p>padding-top:10px; /<em>上边框留空白</em>/</p>
+<p>padding-right:10px; /<em>右边框留空白</em>/</p>
+<p>padding-bottom:10px; /<em>下边框留空白</em>/</p>
+<p>padding-left:10px; /*左边框留空白</p>
+<p>三、CSS符号属性：</p>
+<p>list-style-type:none; /<em>不编号</em>/</p>
+<p>list-style-type:decimal; /<em>阿拉伯数字</em>/</p>
+<p>list-style-type:lower-roman; /<em>小写罗马数字</em>/</p>
+<p>list-style-type:upper-roman; /<em>大写罗马数字</em>/</p>
+<p>list-style-type:lower-alpha; /<em>小写英文字母</em>/</p>
+<p>list-style-type:upper-alpha; /<em>大写英文字母</em>/</p>
+<p>list-style-type:disc; /<em>实心圆形符号</em>/</p>
+<p>list-style-type:circle; /<em>空心圆形符号</em>/</p>
+<p>list-style-type:square; /<em>实心方形符号</em>/</p>
+<p>list-style-image:url(/dot.gif); /<em>图片式符号</em>/</p>
+<p>list-style-position: outside; /<em>凸排</em>/</p>
+<p>list-style-position:inside; /<em>缩进</em>/</p>
+<p>四、CSS背景样式：</p>
+<p>background-color:#F5E2EC; /<em>背景颜色</em>/</p>
+<p>background:transparent; /<em>透视背景</em>/</p>
+<p>background-image : url(/image/bg.gif); /<em>背景图片</em>/</p>
+<p>background-attachment : fixed; /<em>浮水印固定背景</em>/</p>
+<p>background-repeat : repeat; /<em>重复排列-网页默认</em>/</p>
+<p>background-repeat : no-repeat; /<em>不重复排列</em>/</p>
+<p>background-repeat : repeat-x; /<em>在x轴重复排列</em>/</p>
+<p>background-repeat : repeat-y; /<em>在y轴重复排列</em>/</p>
+<p>指定背景位置</p>
+<p>background-position : 90% 90%; /<em>背景图片x与y轴的位置</em>/</p>
+<p>background-position : top; /<em>向上对齐</em>/</p>
+<p>background-position : buttom; /<em>向下对齐</em>/</p>
+<p>background-position : left; /<em>向左对齐</em>/</p>
+<p>background-position : right; /<em>向右对齐</em>/</p>
+<p>background-position : center; /<em>居中对齐</em>/</p>
+<p>五、CSS连接属性：</p>
+<p>a /<em>所有超链接</em>/</p>
+<p>a:link /<em>超链接文字格式</em>/</p>
+<p>a:visited /<em>浏览过的链接文字格式</em>/</p>
+<p>a:active /<em>按下链接的格式</em>/</p>
+<p>a:hover /<em>鼠标转到链接</em>/</p>
+<p>鼠标光标样式：</p>
+<p>链接手指 CURSOR: hand</p>
+<p>十字体 cursor:crosshair</p>
+<p>箭头朝下 cursor:s-resize</p>
+<p>十字箭头 cursor:move</p>
+<p>箭头朝右 cursor:move</p>
+<p>加一问号 cursor:help</p>
+<p>箭头朝左 cursor:w-resize</p>
+<p>箭头朝上 cursor:n-resize</p>
+<p>箭头朝右上 cursor:ne-resize</p>
+<p>箭头朝左上 cursor:nw-resize</p>
+<p>文字I型 cursor:text</p>
+<p>箭头斜右下 cursor:se-resize</p>
+<p>箭头斜左下 cursor:sw-resize</p>
+<p>漏斗 cursor:wait</p>
+<p>光标图案(IE6) p {cursor:url(“光标文件名.cur”),text;}</p>
+<p>六、CSS框线一览表：</p>
+<p>border-top : 1px solid #6699cc; /<em>上框线</em>/</p>
+<p>border-bottom : 1px solid #6699cc; /<em>下框线</em>/</p>
+<p>border-left : 1px solid #6699cc; /<em>左框线</em>/</p>
+<p>border-right : 1px solid #6699cc; /<em>右框线</em>/</p>
+<p>以上是建议书写方式,但也可以使用常规的方式 如下:</p>
+<p>border-top-color : #369 /<em>设置上框线top颜色</em>/</p>
+<p>border-top-width :1px /<em>设置上框线top宽度</em>/</p>
+<p>border-top-style : solid/<em>设置上框线top样式</em>/</p>
+<p>其他框线样式</p>
+<p>solid /<em>实线框</em>/</p>
+<p>dotted /<em>虚线框</em>/</p>
+<p>double /<em>双线框</em>/</p>
+<p>groove /<em>立体内凸框</em>/</p>
+<p>ridge /<em>立体浮雕框</em>/</p>
+<p>inset /<em>凹框</em>/</p>
+<p>outset /<em>凸框</em>/</p>
+<p>七、CSS表单运用：</p>
+<p>文字方块</p>
+<p>按钮</p>
+<p>复选框</p>
+<p>选择钮</p>
+<p>多行文字方块</p>
+<p>下拉式菜单 选项1选项2</p>
+<p>八、CSS边界样式：</p>
+<p>margin-top:10px; /<em>上边界</em>/</p>
+<p>margin-right:10px; /<em>右边界值</em>/</p>
+<p>margin-bottom:10px; /<em>下边界值</em>/</p>
+<p>margin-left:10px; /<em>左边界值</em>/</p>
+<p>CSS 属性： 字体样式(Font Style)</p>
+<p>序号 中文说明 标记语法</p>
+<p>1 字体样式 {font:font-style font-variant font-weight font-size font-family}</p>
+<p>2 字体类型 {font-family:”字体1”,”字体2”,”字体3”,…}</p>
+<p>3 字体大小 {font-size:数值|inherit| medium| large| larger| x-large| xx-large| small| smaller| x-small| xx-small}</p>
+<p>4 字体风格 {font-style:inherit|italic|normal|oblique}</p>
+<p>5 字体粗细 {font-weight:100-900|bold|bolder|lighter|normal;}</p>
+<p>6 字体颜色 {color:数值;}</p>
+<p>7 阴影颜色 {text-shadow:16位色值}</p>
+<p>8 字体行高 {line-height:数值|inherit|normal;}</p>
+<p>9 字 间 距 {letter-spacing:数值|inherit|normal}</p>
+<p>10 单词间距 {word-spacing:数值|inherit|normal}</p>
+<p>11 字体变形 {font-variant:inherit|normal|small-cps }</p>
+<p>12 英文转换 {text-transform:inherit|none|capitalize|uppercase|lowercase}</p>
+<p>13 字体变形 {font-size-adjust:inherit|none}</p>
+<p>14 字体 {font-stretch:condensed|expanded|extra-condensed|extra-expanded|inherit|narrower|normal| semi-condensed|semi-expanded|ultra-condensed|ultra-expanded|wider}</p>
+<p>文本样式(Text Style)</p>
+<p>序号 中文说明 标记语法</p>
+<p>1 行 间 距 {line-height:数值|inherit|normal;}</p>
+<p>2 文本修饰 {text-decoration:inherit|none|underline|overline|line-through|blink}</p>
+<p>3 段首空格 {text-indent:数值|inherit}</p>
+<p>4 水平对齐 {text-align:left|right|center|justify}</p>
+<p>5 垂直对齐 {vertical-align:inherit|top|bottom|text-top|text-bottom|baseline|middle|sub|super}</p>
+<p>6 书写方式 {writing-mode:lr-tb|tb-rl}</p>
+<p>背景样式</p>
+<p>序号 中文说明 标记语法</p>
+<p>1 背景颜色 {background-color:数值}</p>
+<p>2 背景图片 {background-image: url(URL)|none}</p>
+<p>3 背景重复 {background-repeat:inherit|no-repeat|repeat|repeat-x|repeat-y}</p>
+<p>4 背景固定 {background-attachment:fixed|scroll}</p>
+<p>5 背景定位 {background-position:数值|top|bottom|left|right|center}</p>
+<p>6 背影样式 {background:背景颜色|背景图象|背景重复|背景附件|背景位置}</p>
+<p>框架样式(Box Style)</p>
+<p>序号 中文说明 标记语法</p>
+<p>1 边界留白 {margin:margin-top margin-right margin-bottom margin-left}</p>
+<p>2 补　　白 {padding:padding-top padding-right padding-bottom padding-left}</p>
+<p>3 边框宽度 {border-width:border-top-width border-right-width border-bottom-width border-left-width}　　</p>
+<p>宽度值： thin|medium|thick|数值</p>
+<p>4 边框颜色 {border-color:数值 数值 数值 数值}　　数值：分别代表top、right、bottom、left颜色值</p>
+<p>5 边框风格 {border-style:none|hidden|inherit|dashed|solid|double|inset|outset|ridge|groove}</p>
+<p>6 边　　框 {border:border-width border-style color}</p>
+<p>上 边 框 {border-top:border-top-width border-style color}</p>
+<p>右 边 框 {border-right:border-right-width border-style color}</p>
+<p>下 边 框 {border-bottom:border-bottom-width border-style color}</p>
+<p>左 边 框 {border-left:border-left-width border-style color}</p>
+<p>7 宽　　度 {width:长度|百分比| auto}</p>
+<p>8 高　　度 {height:数值|auto}</p>
+<p>9 漂　　浮 {float:left|right|none}</p>
+<p>10 清　　除 {clear:none|left|right|both}</p>
+<p>分类列表</p>
+<p>序号 中文说明 标记语法</p>
+<p>1 控制显示 {display:none|block|inline|list-item}</p>
+<p>2 控制空白 {white-space:normal|pre|nowarp}</p>
+<p>3 符号列表 {list-style-type:disc|circle|square|decimal|lower-roman|upper-roman|lower-alpha|upper-alpha|none}</p>
+<p>4 图形列表 {list-style-image:URL}</p>
+<p>5 位置列表 {list-style-position:inside|outside}</p>
+<p>6 目录列表 {list-style:目录样式类型|目录样式位置|url}</p>
+<p>7 鼠标形状 {cursor:hand|crosshair|text|wait|move|help|e-resize|nw-resize|w-resize|s-resize|se-resize|sw-resize}</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/"><span class="tags-punctuation"></span>前端经验<span class="tagsPageCount">4</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/GitHub/Git%E5%9F%BA%E7%A1%80-Github%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Git基础-Github自定义域名</div></div></a></div><div class="next-post pull-right"><a href="/Vscode/Vscode%E7%AC%94%E8%AE%B0-24%E6%AC%BE%E6%8F%92%E4%BB%B6"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Vscode笔记-24款插件</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/CSS%E5%B1%9E%E6%80%A7%E5%A4%A7%E5%85%A8" title="CSS属性大全"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/cover/css1.jpg" alt="cover"><div class="content is-center"><div class="title">CSS属性大全</div></div></a></div><div><a href="/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/HTML%E4%B8%8ECSS%E8%BF%9B%E9%98%B6" title="HTML与CSS进阶"><img class="cover" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/cover/html2.jpg" alt="cover"><div class="content is-center"><div class="title">HTML与CSS进阶</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E7%AC%94%E8%AE%B0"><span class="toc-text">CSS笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#li-nth-child-1-%EF%BC%9A%E7%AC%AC%E4%B8%80%E4%B8%AA"><span class="toc-text">li:nth-child(1)：第一个</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA-3D-%E8%BD%AC%E6%8D%A2%E5%85%83%E7%B4%A0%E5%AE%9A%E4%B9%89%E9%80%8F%E8%A7%86%E8%A7%86%E5%9B%BE"><span class="toc-text">为 3D 转换元素定义透视视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#border-radius-80px-50px-%E6%A4%AD%E5%9C%86"><span class="toc-text">border-radius: 80px&#x2F;50px;椭圆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS%E6%95%B4%E7%90%86%E7%89%88"><span class="toc-text">CSS整理版</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>

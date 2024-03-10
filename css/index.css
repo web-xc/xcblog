@@ -2828,6 +2828,11 @@ strong {
     left: 0;
   }
 }
+@media screen and (max-width: 768px) {
+  #nav-console {
+    display: none;
+  }
+}
 .layout {
   display: flex;
   margin: 0 auto;
@@ -7554,6 +7559,215 @@ div.timenode:hover .meta:after {
   animation: gradient 2s ease infinite;
   background-size: 200%;
 }
+#nav-music {
+  display: flex;
+  align-items: center;
+  z-index: 8;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  transform-origin: left bottom;
+  box-shadow: var(--sco-shadow-border);
+  border-radius: 40px;
+  overflow: hidden;
+  user-select: none;
+}
+@media screen and (max-width: 798px) {
+  #nav-music {
+    display: none !important;
+  }
+}
+#nav-music span {
+  user-select: none;
+}
+#nav-music div {
+  user-select: none;
+}
+#nav-music.playing {
+  box-shadow: 0 0 12px -3px var(--sco-none);
+  -webkit-animation: playingShadow 5s linear infinite;
+}
+#nav-music.playing .aplayer {
+  background: var(--sco-main-op-deep);
+  border: var(--style-border-hover);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: translateZ(0);
+}
+#nav-music.playing .aplayer.aplayer-withlrc .aplayer-pic {
+  box-shadow: 0 0 14px rgba(255,255,255,0.651);
+  -webkit-transform: rotate(0) scale(1.1);
+  border-color: var(--sco-white);
+  animation-play-state: running;
+}
+#nav-music.playing .aplayer.aplayer-withlrc .aplayer-info {
+  color: var(--sco-white);
+}
+#nav-music.playing .aplayer.aplayer-withlrc .aplayer-lrc {
+  width: 200px;
+  margin-bottom: 0;
+  opacity: 1;
+}
+#nav-music.playing .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+  opacity: 1;
+}
+#nav-music.playing .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+  animation-play-state: running;
+}
+#nav-music.playing #nav-music-hoverTips {
+  opacity: 0;
+}
+#nav-music .aplayer {
+  background: var(--sco-card-bg);
+  border-radius: 60px;
+  height: 41px;
+  display: flex;
+  margin: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  border: var(--style-border);
+  box-shadow: none;
+}
+#nav-music .aplayer.aplayer-withlrc .aplayer-pic {
+  height: 25px;
+  width: 25px;
+  border-radius: 40px;
+  z-index: 1;
+  transition: 0.3s;
+  -webkit-transform: rotate(0) scale(1);
+  border: var(--style-border-always);
+  -webkit-animation: changeright 24s linear infinite;
+  animation-play-state: paused;
+}
+#nav-music .aplayer.aplayer-withlrc .aplayer-info {
+  height: 100%;
+  color: var(--sco-fontcolor);
+  margin-left: 8px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+#nav-music .aplayer.aplayer-withlrc .aplayer-lrc {
+  width: 0;
+  opacity: 0;
+  transition: 0.3s;
+  margin-left: 8px;
+  margin-top: -2px;
+}
+#nav-music .aplayer .aplayer-notice {
+  display: none;
+}
+#nav-music .aplayer .aplayer-miniswitcher {
+  display: none;
+}
+#nav-music .aplayer .aplayer-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 8px;
+}
+#nav-music .aplayer .aplayer-pic .aplayer-play {
+  opacity: 0;
+}
+#nav-music .aplayer .aplayer-pic div {
+  display: none;
+}
+#nav-music .aplayer .aplayer-info .aplayer-music {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  z-index: 1;
+}
+#nav-music .aplayer .aplayer-info .aplayer-music .aplayer-author {
+  display: none;
+}
+#nav-music .aplayer .aplayer-info .aplayer-music .aplayer-title {
+  cursor: pointer;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 0.3s;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-time {
+  display: none;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+  margin: 0;
+  padding: 0;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar {
+  height: 100%;
+  background: 0 0;
+  opacity: 0;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+  display: none;
+}
+#nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played {
+  height: 100%;
+  opacity: 0.1;
+  background-color: var(--sco-white) !important;
+  -webkit-animation: lightBar 5s ease infinite;
+  animation-play-state: paused;
+}
+#nav-music .aplayer.aplayer-withlist .aplayer-info {
+  border: none;
+}
+#nav-music .aplayer .aplayer-lrc p {
+  color: rgba(255,255,255,0.702);
+  filter: blur(1px);
+}
+#nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current {
+  color: var(--sco-white);
+  border: none;
+  filter: blur(0);
+}
+#nav-music #nav-music-hoverTips {
+  color: var(--sco-white);
+  background: var(--sco-main);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 40px;
+  opacity: 0;
+  font-size: 12px;
+  z-index: 2;
+  pointer-events: none;
+  transition: 0.3s;
+}
+#nav-music:hover:not(.playing) #nav-music-hoverTips {
+  opacity: 1;
+}
+#nav-music .aplayer-list {
+  display: none;
+}
+#nav-music .aplayer .aplayer-lrc:after,
+#nav-music .aplayer .aplayer-lrc:before {
+  display: none;
+}
+i.fab {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-bottom: 4px;
+}
 #article-container {
   overflow-wrap: break-word;
 }
@@ -9117,13 +9331,161 @@ figure.highlight pre .javascript .function {
   color: #c792ea;
 }
 figure.highlight .highlight-tools .sco-copy-fill {
-  right: 0.7rem;
+  right: 1.7rem;
 }
-figure.highlight .expand + .code-lang {
-  left: 1.7rem;
+figure.highlight .highlight-tools:after {
+  position: absolute;
+  left: 14px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fc625d;
+  -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+  content: ' ';
 }
-figure.highlight .expand.closed {
-  transform: rotate(-90deg);
+figure.highlight .highlight-tools .expand {
+  right: 0;
+}
+figure.highlight .highlight-tools .expand + .code-lang {
+  left: 75px;
+}
+figure.highlight .highlight-tools .expand.closed {
+  transform: rotate(90deg);
+}
+.post-ai {
+  background: var(--sco-secondbg);
+  border-radius: 12px;
+  padding: 12px;
+  line-height: 1.3;
+  border: var(--style-border-always);
+  margin-top: 16px;
+  min-height: 101.22px;
+  box-shadow: var(--sco-shadow-border);
+}
+@media screen and (max-width: 768px) {
+  .post-ai {
+    margin-top: 22px;
+  }
+}
+.post-ai .ai-title {
+  display: flex;
+  color: var(--sco-lighttext);
+  border-radius: 8px;
+  align-items: center;
+  padding: 0 12px;
+  user-select: none;
+}
+.post-ai .ai-title .ai-title-left {
+  display: flex;
+  align-items: center;
+  color: var(--sco-lighttext);
+}
+.post-ai .ai-title .ai-title-left i.ai-title-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  background: var(--sco-lighttext);
+  color: var(--sco-card-bg);
+  font-size: 14px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.post-ai .ai-title .ai-title-left .ai-title-text {
+  font-weight: 700;
+  margin-left: 8px;
+  line-height: 1;
+  font-size: 14px;
+}
+.post-ai .ai-title .ai-tag {
+  font-size: 12px;
+  background-color: var(--sco-lighttext);
+  box-shadow: var(--sco-shadow-main);
+  color: var(--sco-card-bg);
+  font-weight: 700;
+  border-radius: 12px;
+  margin-left: auto;
+  line-height: 12px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.post-ai .ai-title .ai-tag.loadingAI {
+  animation-duration: 2s;
+  animation-name: AILoading;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  cursor: default;
+}
+.post-ai .ai-title .ai-tag:hover:not(.loadingAI) {
+  background: var(--sco-fontcolor);
+  color: var(--sco-card-bg);
+}
+.post-ai .ai-explanation {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--sco-card-bg);
+  border-radius: 8px;
+  border: var(--style-border-always);
+  font-size: 15px;
+  line-height: 1.4;
+  display: none;
+  text-align: left;
+}
+.post-ai .ai-explanation .blinking-cursor {
+  background-color: var(--sco-lighttext);
+  width: 14px;
+  height: 14px;
+  border-radius: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  animation: blinking-cursor 2s infinite;
+  -webkit-animation: blinking-cursor 2s infinite;
+  margin-left: 4px;
+  margin-bottom: 3px;
+  transform: scale(0.6);
+}
+.post-ai .ai-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+}
+.post-ai .ai-suggestions .ai-suggestions-item {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: var(--sco-card-bg);
+  border-radius: 8px 8px 8px 0;
+  border: var(--style-border-always);
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  width: fit-content;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.post-ai .ai-suggestions .ai-suggestions-item:hover {
+  background: var(--sco-main);
+  color: var(--sco-white);
+}
+.post-ai .ai-bottom {
+  width: 100%;
+  margin-top: 12px;
+  padding: 0 12px;
+  display: flex;
+}
+.post-ai .ai-bottom .ai-tips {
+  font-size: 12px;
+  color: var(--sco-secondtext);
+  margin-right: auto;
+}
+.post-ai .ai-bottom .ai-report {
+  font-size: 12px;
+  color: var(--sco-secondtext);
+  white-space: nowrap;
 }
 @media screen and (min-width: 768px) and (max-width: 1300px) {
   #post > div.relatedPosts > div.relatedPosts-list > div:nth-child(7) {
@@ -9174,8 +9536,8 @@ figure.highlight .expand.closed {
   --style-border-hover-always: 1px solid var(--sco-theme);
   --style-border-dashed: 1px dashed var(--sco-theme-op);
   --style-border-forever: 2px solid var(--sco-lighttext);
-  --sco-hl-bg: #1b1c20;
-  --sco-hltools-bg: #21232a;
+  --sco-hl-bg: #1c1e1e;
+  --sco-hltools-bg: #2a282a;
 }
 [data-theme=light] {
   --sco-theme: #425aef;
@@ -9221,7 +9583,7 @@ figure.highlight .expand.closed {
   --style-border-forever: 2px solid var(--sco-main);
   --sco-navbg: var(--sco-theme-op);
   --sco-hl-bg: #fff;
-  --sco-hltools-bg: #f7f7f9;
+  --sco-hltools-bg: #e7e7e7;
 }
 @media screen and (max-width: 768px) {
   :root {

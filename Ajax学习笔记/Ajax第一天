@@ -1,0 +1,1036 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ajax第一天 | XC's Blog</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=1.5.1"><!-- inject head--><link rel="stylesheet" href="https://cdn.cbd.int/solitude-source/icon/scoicon.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.css"><!-- aplayer--><link rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css"><!-- swiper--><!-- Open Graph--><meta name="description" content="Ajax第一天 – ajax概念 – axios的使用 – HTTP协议知识点自测 如下对象取值的方式哪个正确? 123let obj &amp;#x3D; &amp;amp;#123; name: &amp;amp;#x27;黑马&amp;amp;#x27;&amp;amp;#125; A: obj.a B: obj()a 答案 A选项正确 哪个赋值会让浏览"><!-- pwa--><script>(win => {
+        win.saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay,
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        }
+
+        const DarkModeStatus = localStorage.getItem('theme')
+        if (DarkModeStatus !== null) {
+            if (DarkModeStatus === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark')
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light')
+            }
+        }
+
+        const asideStatus = saveToLocal.get('aside-status')
+        if (asideStatus !== undefined) {
+            if (asideStatus === 'hide') {
+                document.documentElement.classList.add('hide-aside')
+            } else {
+                document.documentElement.classList.remove('hide-aside')
+            }
+        }
+    }
+)(window)
+
+console.log(
+    "%c Program: Hexo %c Theme: Hexo-Theme-Solitude %c Version: v1.5.1",
+    "border-radius:5px 0 0 5px;padding: 5px 10px;color:white;background:#ff3842;margin:10px 0",
+    "padding: 5px 10px;color:white;background:#3e9f50;",
+    "border-radius:0 5px 5px 0;padding: 5px 10px;background:#0084ff;"
+);</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2021-04-20 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.png'
+    },
+    hightlight: {
+        enable: true,
+        limit: 200,
+        expand: false,
+        copy: true,
+    },
+    randomlinks: false,
+    lang: {
+        theme: {
+            dark: '已切换至深色模式',
+            light: '已切换至浅色模式',
+        },
+        copy: {
+            success: '复制成功',
+            error: '复制失败',
+        },
+        backtop: '返回顶部',
+        time: {
+            recent: '最近',
+            yesterday: '昨天',
+            berforeyesterday: '前天',
+            daybefore: '天前',
+            runtime: '天',
+        },
+        search: {
+            empty: '找不到你查询的内容：${query}',
+            hit: '找到 ${hits} 条结果，用时 ${time} 毫秒',
+            placeholder: '输入关键词快速查找',
+        },
+        chs: {
+            chs_to_cht: '繁體中文',
+            cht_to_chs: '简体中文',
+        }
+    },
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: ["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🏠 智能家居小能手","🔨 设计开发一条龙","🤝 专修交互与设计","🏃 脚踏实地行动派","🧱 团队小组发动机","💢 壮汉人狠话不多","🎮 电竞游戏爱好者"],
+    },
+    covercolor: {
+        enable: true
+    },
+    comment: {
+        enable: false,
+        type: '',
+        commentBarrage: false,
+        randomInfoStart: ["聪敏的","可爱的","美丽的"],
+        randomInfoEnd: ["白菜","小可爱","小仙女"],
+        twikoo: {
+            url: '',
+            accessToken: ''
+        },
+        waline: {
+            url: '',
+        }
+    },
+    lightbox: 'null',
+    rightside: {
+        enable: false
+    },
+    ai: {
+        enable: true,
+        key: '',
+        talk: '我是王卓Sco开发的摘要生成助理ScoGPT，ScoGPT在静态部署时进行摘要的撰写，并且在访客访问时通过ScoCorrection转译后的文本摘要实现工具。我在这里只负责已经生成的摘要显示，你无法与我直接沟通，但我可以回答一些预设的问题。',
+        randomPost: false,
+    },
+    music: {
+        enable: false,
+    },
+    translate: undefined,
+};</script><meta name="generator" content="Hexo 6.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="scoicon sco-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i></a></div><div class="console-btn-item" id="consoleHideAside"><a class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制" href="javascript:void(0);"><i class="scoicon sco-side-bar-fill"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="sco.musicToggle()"><a class="music-switch" title="音乐开关" href="javascript:void(0);"><i class="scoicon sco-disc-fill"></i></a></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()" href="javascript:void(0);"><i class="scoicon sco-moon-clear-fill"></i><span>显示模式</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"><a href="/tags/Ajax%E7%AC%94%E8%AE%B0/">Ajax笔记<sup>6</sup></a><a href="/tags/Hexo/">Hexo<sup>6</sup></a><a href="/tags/Qexo/">Qexo<sup>1</sup></a><a href="/tags/GitHub/">GitHub<sup>3</sup></a><a href="/tags/JavaScript/">JavaScript<sup>3</sup></a><a href="/tags/Markdown/">Markdown<sup>2</sup></a><a href="/tags/JavaScript%E7%AC%94%E8%AE%B0/">JavaScript笔记<sup>5</sup></a><a href="/tags/Vscode/">Vscode<sup>2</sup></a><a href="/tags/Vue%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80/">Vue前置基础<sup>5</sup></a><a href="/tags/Vue%E6%A1%86%E6%9E%B6%E7%AC%94%E8%AE%B0/">Vue框架笔记<sup>6</sup></a><a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题<sup>2</sup></a><a href="/tags/Web-APIs%E7%AC%94%E8%AE%B0/">Web APIs笔记<sup>10</sup></a><a href="/tags/JavaScript%E9%AB%98%E7%BA%A7/">JavaScript高级<sup>5</sup></a><a href="/tags/Windows/">Windows<sup>3</sup></a><a href="/tags/%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF%E6%A0%88/">其他技术栈<sup>6</sup></a><a href="/tags/jQuery/">jQuery<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF%E6%A0%88/">前端技术栈<sup>3</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-CSS/">学习笔记-CSS<sup>9</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-HTML/">学习笔记-HTML<sup>2</sup></a><a href="/tags/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%BB%8F%E9%AA%8C/">前端经验<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E7%AC%94%E8%AE%B0/">前端笔记<sup>3</sup></a><a href="/tags/%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/">网站资源<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93%E7%8E%A9%E6%9C%BA/">安卓玩机<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议<sup>1</sup></a></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">XC's Blog</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Ajax第一天</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="scoicon sco-signal-tower-fill"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><i class="scoicon sco-dashboard-fill"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="scoicon sco-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="scoicon sco-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/ajax.webp" alt="Ajax第一天"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/Ajax笔记/">Ajax笔记</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ajax%E7%AC%94%E8%AE%B0/"><span class="tags-name tags-punctuation">Ajax笔记</span></a></div></div></div></div><h1 class="post-title">Ajax第一天</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><div class="post-ai"><div class="ai-title"><div class="ai-title-left"><i class="ai-title-icon scoicon sco-robot-fill"></i><div class="ai-title-text">文章摘要</div></div><div class="ai-tag" id="ai-tag">GPT 4</div></div><div class="ai-explanation" style="display: block;"></div><div class="ai-suggestions"></div><div class="ai-bottom"><div class="ai-tips">此内容根据文章生成，并经过人工审核，仅用于文章内容的解释与总结</div><a class="ai-report" title="投诉" target="_blank" rel="noopener" href="https://blog.wzsco.top/about/">投诉</a></div></div><article class="post-content" id="article-container"><h3 id="Ajax第一天-–-ajax概念-–-axios的使用-–-HTTP协议"><a href="#Ajax第一天-–-ajax概念-–-axios的使用-–-HTTP协议" class="headerlink" title="Ajax第一天 – ajax概念 – axios的使用 – HTTP协议"></a>Ajax第一天 – ajax概念 – axios的使用 – HTTP协议</h3><h2 id="知识点自测"><a href="#知识点自测" class="headerlink" title="知识点自测"></a>知识点自测</h2><ol>
+<li><p>如下对象取值的方式哪个正确?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;黑马&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>A: obj.a</p>
+<p>B: obj()a</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>A选项正确</li>
+</ul>
+</details></li>
+</ol>
+<ol start="2">
+<li><p>哪个赋值会让浏览器解析成标签显示?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ul = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#ul&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> str = <span class="string">`&lt;span&gt;我是span标签&lt;/span&gt;`</span></span><br></pre></td></tr></table></figure>
+
+<p>A: ul.innerText = str</p>
+<p>B: ul.innerHTML = str</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>选择B, innerText会把字符串当做普通文本现在在ul标签之间, innerHTML会试着把字符串解析成标签, 如果是普通文本则显示普通文本字符串</li>
+</ul>
+</details></li>
+</ol>
+<ol start="3">
+<li><p>哪个是获取输入框值的方式?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> theInput = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#input&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>A: theInput.innerHTML</p>
+<p>B: theInput.value</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是B, 表单标签设置或获取值用value属性, 其他标签用innerHTML/innerText, 进行设置/获取</li>
+</ul>
+</details></li>
+</ol>
+<ol start="4">
+<li><p>哪个是用于获取标签内容?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> theP = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#p&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>A: theP.innerHTML = ‘内容’</p>
+<p>B: theP.innerHTML</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是B, 单独出现是获取值在原地, 如果看到=这个符号, 是把右侧的值赋予给左侧的属性, 影响标签展示效果</li>
+</ul>
+</details></li>
+</ol>
+<ol start="5">
+<li><p>哪个是数组的映射方法？</p>
+<p>A: arr.forEach</p>
+<p>B: arr.map</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是B</li>
+</ul>
+</details></li>
+</ol>
+<ol start="6">
+<li><p>数组转字符串并指定拼接符的是哪个?</p>
+<p>A: arr.join()</p>
+<p>B: arr.split()</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是A</li>
+</ul>
+</details></li>
+</ol>
+<ol start="7">
+<li><p>函数传参的方式哪个是正确的？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">showAlert</span>(<span class="params">msg, className</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>A：showAlert(‘消息’, ‘类名’)</p>
+<p>B：showAlert()</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是A</li>
+</ul>
+</details></li>
+</ol>
+<ol start="8">
+<li><p>以下哪套代码可以实现对象属性的简写？</p>
+<p>A：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> username = <span class="string">&#x27;老李&#x27;</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">username</span>: username</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>B：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = <span class="string">&#x27;老李&#x27;</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">username</span>: user</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是A</li>
+</ul>
+</details></li>
+</ol>
+<ol start="9">
+<li><p>以下代码的值是多少？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> age = <span class="number">10</span></span><br><span class="line"><span class="keyword">const</span> result = age &gt; <span class="number">18</span> ? <span class="string">&#x27;成年了&#x27;</span> : <span class="string">&#x27;未成年&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>A：‘成年了’</p>
+<p>B：‘未成年’</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是B</li>
+</ul>
+</details></li>
+</ol>
+<ol start="10">
+<li><p>以下哪个方法可以添加一个额外类名？</p>
+<p>A：标签对象.classList.add()</p>
+<p>B：标签对象.classList.contains()</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>答案是A</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li>AJAX 概念和 axios 使用</li>
+<li>认识 URL</li>
+<li>URL 查询参数</li>
+<li>常用请求方法和数据提交</li>
+<li>HTTP协议-报文</li>
+<li>接口文档</li>
+<li>案例 - 用户登录</li>
+<li>form-serialize 插件</li>
+</ul>
+<h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ol>
+<li>掌握 axios 相关参数，从服务器获取并解析展示数据</li>
+<li>掌握接口文档的查看和使用</li>
+<li>掌握在浏览器的 network 面板中查看请求和响应的内容</li>
+<li>了解请求和响应报文的组成部分</li>
+</ol>
+<h2 id="01-AJAX-概念和-axios-使用"><a href="#01-AJAX-概念和-axios-使用" class="headerlink" title="01.AJAX 概念和 axios 使用"></a>01.AJAX 概念和 axios 使用</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>了解 AJAX 概念并掌握 axios 库基本使用</li>
+</ul>
+<h3 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>什么是 AJAX ? <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/AJAX/Getting_Started">mdn</a></p>
+<ul>
+<li>使用浏览器的 XMLHttpRequest 对象 与服务器通信</li>
+</ul>
+</li>
+<li><p>什么是服务器？</p>
+<ul>
+<li>可以暂时理解为提供数据的一台电脑</li>
+</ul>
+</li>
+<li><p>为何学 AJAX ?</p>
+<ul>
+<li>以前我们的数据都是写在代码里固定的, 无法随时变化</li>
+<li>现在我们的数据可以从服务器上进行获取，让数据变活</li>
+</ul>
+</li>
+<li><p>怎么学 AJAX ?</p>
+<ul>
+<li>这里使用一个第三方库叫 axios, 后续在学习 XMLHttpRequest 对象了解 AJAX 底层原理</li>
+<li>因为 axios 库语法简单，让我们有更多精力关注在与服务器通信上，而且后续 Vue，React 学习中，也使用 axios 库与服务器通信</li>
+</ul>
+</li>
+<li><p>接下来讲解 axios 语法</p>
+<ol>
+<li><p>引入 axios.js 文件到自己的网页中</p>
+<blockquote>
+<p>axios.js文件链接: <a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js</a></p>
+</blockquote>
+</li>
+<li><p>明确axios函数的使用语法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;目标资源地址&#x27;</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 对服务器返回的数据做后续处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：请求的 url 地址, 就是标记资源的网址</p>
+<p>注意：then 方法这里先体验使用，由来后续会讲到</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><p>用一个需求来体验 axios 语法的使用，从服务器获取省份列表数据，展示到页面上</p>
+<blockquote>
+<p>获取省份列表数据 - 目标资源地址：<a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/province">http://hmajax.itheima.net/api/province</a></p>
+</blockquote>
+<ul>
+<li><p>完成效果：</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220113157010.png" alt="image-20230220113157010"></p>
+</li>
+<li><p>对应代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>AJAX概念和axios使用<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">    axios库地址：https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js</span></span><br><span class="line"><span class="comment">    省份数据地址：http://hmajax.itheima.net/api/province</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    目标: 使用axios库, 获取省份列表数据, 展示到页面上</span></span><br><span class="line"><span class="comment">    1. 引入axios库</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;my-p&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 2. 使用axios函数</span></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 好习惯：多打印，确认属性名</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>.<span class="property">list</span>)</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>.<span class="property">list</span>.<span class="title function_">join</span>(<span class="string">&#x27;&lt;br&gt;&#x27;</span>))</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 把准备好省份列表，插入到页面</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.my-p&#x27;</span>).<span class="property">innerHTML</span> = result.<span class="property">data</span>.<span class="property">list</span>.<span class="title function_">join</span>(<span class="string">&#x27;&lt;br&gt;&#x27;</span>) </span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>AJAX 有什么用？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>浏览器和服务器之间通信，动态数据交互</li>
+</ul>
+</details></li>
+</ol>
+<ol start="2">
+<li><p>AJAX 如何学：</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>先掌握 axios 库使用，再了解 XMLHttpRequest 原理</li>
+</ul>
+</details></li>
+</ol>
+<ol start="3">
+<li><p>这一节 axios 体验步骤（语法）？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>引入 axios 库，使用 axios 相关语法</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="02-认识-URL"><a href="#02-认识-URL" class="headerlink" title="02.认识 URL"></a>02.认识 URL</h2><h3 id="目标-1"><a href="#目标-1" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>了解 URL 的组成和作用</li>
+</ul>
+<h3 id="讲解-1"><a href="#讲解-1" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>为什么要认识 URL ? <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/AJAX/Getting_Started">mdn</a></p>
+<ul>
+<li>虽然是后端给我的一个地址，但是哪部分标记的是服务器，哪部分标记的是资源呢？所以为了和服务器有效沟通我们要认识一下</li>
+</ul>
+</li>
+<li><p>什么是 URL ？</p>
+<ul>
+<li>统一资源定位符，简称网址，用于定位网络中的资源</li>
+<li>资源：网页，图片，数据，视频，音频等等</li>
+</ul>
+</li>
+<li><p>URL 的组成?</p>
+<ul>
+<li>协议，域名，资源路径（URL 组成有很多部分，我们先掌握这3个重要的部分即可）</li>
+</ul>
+</li>
+<li><p>什么是 http 协议 ?</p>
+<ul>
+<li>叫超文本传输协议，规定了浏览器和服务器传递数据的格式（而格式具体有哪些稍后我们就会学到）</li>
+</ul>
+</li>
+<li><p>什么是域名 ?</p>
+<ul>
+<li>标记服务器在互联网当中的方位，网络中有很多服务器，你想访问哪一台，就需要知道它的域名才可以</li>
+</ul>
+</li>
+<li><p>什么是资源路径 ?</p>
+<ul>
+<li>一个服务器内有多个资源，用于标识你要访问的资源具体的位置</li>
+</ul>
+</li>
+<li><p>接下来做个需求，访问新闻列表的 URL 网址，打印新闻数据</p>
+<ul>
+<li>效果图如下：</li>
+</ul>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220122455915.png" alt="image-20230220122455915"></p>
+<blockquote>
+<p>新闻列表数据 URL 网址：<a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/news">http://hmajax.itheima.net/api/news</a></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/news&#x27;</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>url解释：从黑马服务器使用http协议，访问/api/news路径下的新闻列表资源</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>URL 是什么？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>统一资源定位符，网址，用于访问服务器上资源
+</li>
+</ul>
+</details></li>
+</ol>
+<ol start="2">
+<li><p>请解释这个 URL，每个部分作用？</p>
+<p><a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/news">http://hmajax.itheima.net/api/news</a></p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>协议://域名/资源路径
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="03-URL-查询参数"><a href="#03-URL-查询参数" class="headerlink" title="03.URL 查询参数"></a>03.URL 查询参数</h2><h3 id="目标-2"><a href="#目标-2" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>掌握-通过URL传递查询参数，获取匹配的数据</li>
+</ul>
+<h3 id="讲解-2"><a href="#讲解-2" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>什么是查询参数 ?</p>
+<ul>
+<li>携带给服务器额外信息，让服务器返回我想要的某一部分数据而不是全部数据</li>
+<li>举例：查询河北省下属的城市列表，需要先把河北省传递给服务器</li>
+</ul>
+</li>
+<li><p>查询参数的语法 ？</p>
+<ul>
+<li>在 url 网址后面用?拼接，格式参数名=值&amp;参数名=值的查询参数字符串</li>
+<li>参数名一般是后端规定的，值前端看情况传递即可</li>
+</ul>
+</li>
+<li><p>axios 如何携带查询参数?</p>
+<ul>
+<li><p>使用 params 选项即可、</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220124958792.png" alt="image-20230220124958792"></p>
+<blockquote>
+<p>查询城市列表的 url地址：<a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/city?pname=%E6%B2%B3%E5%8C%97%E7%9C%81">http://hmajax.itheima.net/api/city</a></p>
+<p>参数名：pname （值要携带省份名字）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>需求：获取指定省份名字下属的城市列表，展示到页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>查询参数<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    城市列表: http://hmajax.itheima.net/api/city</span></span><br><span class="line"><span class="comment">    参数名: pname</span></span><br><span class="line"><span class="comment">    值: 省份名字</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/city&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// 查询参数</span></span></span><br><span class="line"><span class="language-javascript">      <span class="attr">params</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">pname</span>: <span class="string">&#x27;辽宁省&#x27;</span></span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>.<span class="property">list</span>)</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;p&#x27;</span>).<span class="property">innerHTML</span> = result.<span class="property">data</span>.<span class="property">list</span>.<span class="title function_">join</span>(<span class="string">&#x27;&lt;br&gt;&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>URL 查询参数有什么用？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>浏览器提供给服务器额外信息，获取对应的数据
+</li>
+</ul>
+</details></li>
+</ol>
+<ol start="2">
+<li><p>axios 要如何携带查询参数？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>使用 params 选项，携带参数名和值在对象结构中
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="04-案例-查询-地区列表"><a href="#04-案例-查询-地区列表" class="headerlink" title="04.案例-查询-地区列表"></a>04.案例-查询-地区列表</h2><h3 id="目标-3"><a href="#目标-3" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>巩固查询参数的使用，并查看多对查询参数如何传递</li>
+</ul>
+<h3 id="讲解-3"><a href="#讲解-3" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>需求：根据输入的省份名字和城市名字，查询下属地区列表</p>
+<ul>
+<li><p>完成效果如下：</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220125428695.png" alt="image-20230220125428695"></p>
+</li>
+<li><p>相关参数</p>
+<blockquote>
+<p>查询地区: <a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/area">http://hmajax.itheima.net/api/area</a></p>
+<p>参数名：</p>
+<p>pname：省份名字</p>
+<p>cname：城市名字</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>正确代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">      获取地区列表: http://hmajax.itheima.net/api/area</span></span><br><span class="line"><span class="comment">      查询参数:</span></span><br><span class="line"><span class="comment">        pname: 省份或直辖市名字</span></span><br><span class="line"><span class="comment">        cname: 城市名字</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="comment">// 目标: 根据省份和城市名字, 查询地区列表</span></span><br><span class="line"><span class="comment">// 1. 查询按钮-点击事件</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.sel-btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 2. 获取省份和城市名字</span></span><br><span class="line">    <span class="keyword">let</span> pname = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.province&#x27;</span>).<span class="property">value</span></span><br><span class="line">    <span class="keyword">let</span> cname = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.city&#x27;</span>).<span class="property">value</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 基于axios请求地区列表数据</span></span><br><span class="line">    <span class="title function_">axios</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/area&#x27;</span>,</span><br><span class="line">        <span class="attr">params</span>: &#123;</span><br><span class="line">            pname,</span><br><span class="line">            cname</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// console.log(result)</span></span><br><span class="line">        <span class="comment">// 4. 把数据转li标签插入到页面上</span></span><br><span class="line">        <span class="keyword">let</span> list = result.<span class="property">data</span>.<span class="property">list</span></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(list)</span><br><span class="line">        <span class="keyword">let</span> theLi = list.<span class="title function_">map</span>(<span class="function"><span class="params">areaName</span> =&gt;</span> <span class="string">`&lt;li class=&quot;list-group-item&quot;&gt;<span class="subst">$&#123;areaName&#125;</span>&lt;/li&gt;`</span>).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(theLi)</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.list-group&#x27;</span>).<span class="property">innerHTML</span> = theLi</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>ES6 对象属性和值简写的前提是什么？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>当属性名和value位置变量名同名即可简写
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="05-常用请求方法和数据提交"><a href="#05-常用请求方法和数据提交" class="headerlink" title="05.常用请求方法和数据提交"></a>05.常用请求方法和数据提交</h2><h3 id="目标-4"><a href="#目标-4" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>掌握如何向服务器提交数据，而不单单是获取数据</li>
+</ul>
+<h3 id="讲解-4"><a href="#讲解-4" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>想要提交数据，先来了什么是请求方法</p>
+<ul>
+<li><p>请求方法是一些固定单词的英文，例如：GET，POST，PUT，DELETE，PATCH（这些都是http协议规定的），每个单词对应一种对服务器资源要执行的操作</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220130833363.png" alt="image-20230220130833363"></p>
+</li>
+<li><p>前面我们获取数据其实用的就是GET请求方法，但是axios内部设置了默认请求方法就是GET，我们就没有写</p>
+</li>
+<li><p>但是提交数据需要使用POST请求方法</p>
+</li>
+</ul>
+</li>
+<li><p>什么时候进行数据提交呢？</p>
+<ul>
+<li>例如：多端要查看同一份订单数据，或者使用同一个账号进行登录，那订单/用户名+密码，就需要保存在服务器上，随时随地进行访问</li>
+</ul>
+</li>
+<li><p>axios 如何提交数据到服务器呢？</p>
+<ul>
+<li><p>需要学习，method 和 data 这2个新的选项了（大家不用担心，这2个学完，axios常用的选项就都学完了）</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220131058168.png" alt="image-20230220131058168"></p>
+</li>
+</ul>
+</li>
+<li><p>需求：注册账号，提交用户名和密码到服务器保存</p>
+<blockquote>
+<p>注册用户 URL 网址：<a target="_blank" rel="noopener" href="http://hmajax.itheima.net/api/register">http://hmajax.itheima.net/api/register</a></p>
+<p>请求方法：POST</p>
+<p>参数名：</p>
+<p>username：用户名（要求中英文和数字组成，最少8位）</p>
+<p>password：密码（最少6位）</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>请求方法最常用的是哪2个，分别有什么作用？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>POST 提交数据，GET 查询数据
+</li>
+</ul>
+</details></li>
+<li><p>axios 的核心配置项？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>url：目标资源地址，method：请求方法，params：查询参数，data：提交的数据
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="06-axios-错误处理"><a href="#06-axios-错误处理" class="headerlink" title="06.axios 错误处理"></a>06.axios 错误处理</h2><h3 id="目标-5"><a href="#目标-5" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>掌握接收 axios 响应错误信息的处理语法</li>
+</ul>
+<h3 id="讲解-5"><a href="#讲解-5" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>如果注册相同的用户名，则会遇到注册失败的请求，也就是 axios 请求响应失败了，你会在控制台看到如图的错误：</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220131753051.png" alt="image-20230220131753051"></p>
+</li>
+<li><p>在 axios 语法中要如何处理呢？</p>
+<ul>
+<li>因为，普通用户不会去控制台里看错误信息，我们要编写代码拿到错误并展示给用户在页面上</li>
+</ul>
+</li>
+<li><p>使用 axios 的 catch 方法，捕获这次请求响应的错误并做后续处理，语法如下：</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220131911928.png" alt="image-20230220131911928"></p>
+</li>
+<li><p>对应代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">axios</span>(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/register&#x27;</span>,</span><br><span class="line">      <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">      <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">username</span>: <span class="string">&#x27;itheima007&#x27;</span>,</span><br><span class="line">        <span class="attr">password</span>: <span class="string">&#x27;7654321&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 成功</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span><br><span class="line">    &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 失败</span></span><br><span class="line">      <span class="comment">// 处理错误信息</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(error.<span class="property">response</span>.<span class="property">data</span>.<span class="property">message</span>)</span><br><span class="line">      <span class="title function_">alert</span>(error.<span class="property">response</span>.<span class="property">data</span>.<span class="property">message</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>axios 如何拿到请求响应失败的信息？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>通过 axios 函数调用后，在后面接着调用 .catch 方法捕获
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="07-HTTP-协议-请求报文"><a href="#07-HTTP-协议-请求报文" class="headerlink" title="07.HTTP 协议-请求报文"></a>07.HTTP 协议-请求报文</h2><h3 id="目标-6"><a href="#目标-6" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>了解 HTTP 协议中，请求报文的组成和作用</li>
+</ul>
+<h3 id="讲解-6"><a href="#讲解-6" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>首先，HTTP 协议规定了浏览器和服务器返回内容的格式</p>
+</li>
+<li><p>请求报文：是浏览器按照协议规定发送给服务器的内容，例如刚刚注册用户时，发起的请求报文：</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220132229960.png" alt="image-20230220132229960"></p>
+</li>
+<li><p>这里的格式包含：</p>
+<ul>
+<li>请求行：请求方法，URL，协议</li>
+<li>请求头：以键值对的格式携带的附加信息，比如：Content-Type（指定了本次传递的内容类型）</li>
+<li>空行：分割请求头，空行之后的是发送给服务器的资源</li>
+<li>请求体：发送的资源</li>
+</ul>
+</li>
+<li><p>我们切换到浏览器中，来看看刚才注册用户发送的这个请求报文以及内容去哪里查看呢</p>
+</li>
+</ol>
+<h3 id="小结-6"><a href="#小结-6" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>浏览器发送给服务器的内容叫做，请求报文</p>
+</li>
+<li><p>请求报文的组成是：</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>请求行，请求头，空行，请求体
+</li>
+</ul>
+</details></li>
+<li><p>通过 Chrome 的网络面板如何查看请求体？</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220132617016.png" alt="image-20230220132617016"></p>
+</li>
+</ol>
+<h2 id="08-请求报文-错误排查"><a href="#08-请求报文-错误排查" class="headerlink" title="08.请求报文-错误排查"></a>08.请求报文-错误排查</h2><h3 id="目标-7"><a href="#目标-7" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>了解学习了查看请求报文之后的作用，可以用来辅助错误排查</li>
+</ul>
+<h3 id="讲解-7"><a href="#讲解-7" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li>学习了查看请求报文有什么用呢？<ul>
+<li>可以用来确认我们代码发送的请求数据是否真的正确</li>
+</ul>
+</li>
+<li>这里是我同桌的代码，它把登录也写完了，但是无法登录，我们来到模板代码中，找到运行后，在不逐行查看代码的情况下，帮他找找问题出现的原因</li>
+<li>发现请求体数据有问题，往代码中定位，找到类名写错误了</li>
+</ol>
+<h3 id="小结-7"><a href="#小结-7" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>学会了查看请求报文，对实际开发有什么帮助呢？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>可以快速确认我们发送的内容是否正确
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="09-HTTP-协议-响应报文"><a href="#09-HTTP-协议-响应报文" class="headerlink" title="09.HTTP 协议-响应报文"></a>09.HTTP 协议-响应报文</h2><h3 id="目标-8"><a href="#目标-8" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>了解响应报文的组成</li>
+</ul>
+<h3 id="讲解-8"><a href="#讲解-8" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>响应报文：是服务器按照协议固定的格式，返回给浏览器的内容</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220133141151.png" alt="image-20230220133141151"></p>
+</li>
+<li><p>响应报文的组成：</p>
+<ul>
+<li>响应行（状态行）：协议，HTTP响应状态码，状态信息</li>
+<li>响应头：以键值对的格式携带的附加信息，比如：Content-Type（告诉浏览器，本次返回的内容类型）</li>
+<li>空行：分割响应头，控制之后的是服务器返回的资源</li>
+<li>响应体：返回的资源</li>
+</ul>
+</li>
+<li><p>HTTP 响应状态码：</p>
+<ul>
+<li><p>用来表明请求是否成功完成</p>
+</li>
+<li><p>例如：404（服务器找不到资源）</p>
+<p><img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/image-20230220133344116.png" alt="image-20230220133344116"></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="小结-8"><a href="#小结-8" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>响应报文的组成？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>响应行，响应头，空行，响应体
+</li>
+</ul>
+</details></li>
+<li><p>HTTP 响应状态码是做什么的？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>表明请求是否成功完成，2xx都是成功的
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="10-接口文档"><a href="#10-接口文档" class="headerlink" title="10.接口文档"></a>10.接口文档</h2><h3 id="目标-9"><a href="#目标-9" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>掌握接口文档的使用，配合 axios 与服务器进行数据交互</li>
+</ul>
+<h3 id="讲解-9"><a href="#讲解-9" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li>接口文档：描述接口的文章（一般是后端工程师，编写和提供）</li>
+<li>接口：使用 AJAX 和 服务器通讯时，使用的 URL，请求方法，以及参数，例如：<a target="_blank" rel="noopener" href="https://www.apifox.cn/apidoc/project-1937884/doc-1695440">AJAX阶段接口文档</a></li>
+<li>查看登录接口，并编写代码，完成一次登录的效果吧</li>
+</ol>
+<h3 id="小结-9"><a href="#小结-9" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>接口文档是什么？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>由后端提供的描述接口的文章
+</li>
+</ul>
+</details></li>
+<li><p>接口文档里包含什么？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>请求的 URL 网址，请求方法，请求参数和说明
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="11-案例-用户登录-主要业务"><a href="#11-案例-用户登录-主要业务" class="headerlink" title="11.案例-用户登录-主要业务"></a>11.案例-用户登录-主要业务</h2><h3 id="目标-10"><a href="#目标-10" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>尝试通过页面获取用户名和密码，进行登录</li>
+</ul>
+<h3 id="讲解-10"><a href="#讲解-10" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>先来到备课代码中，运行完成的页面，查看要完成的效果</p>
+</li>
+<li><p>分析实现的步骤</p>
+<ol>
+<li>点击登录，获取并判断用户名和长度</li>
+<li>提交数据和服务器通信</li>
+<li>提示信息，反馈给用户</li>
+</ol>
+</li>
+<li><p>本视频先来完成前2步</p>
+</li>
+<li><p>编写代码，查看接口文档，填写相关信息，完成登录业务</p>
+</li>
+<li><p>代码细节：</p>
+<ol>
+<li>登录按钮-绑定点击事件</li>
+<li>从页面输入框里，获取用户名和密码</li>
+<li>判断长度是否符合要求</li>
+<li>基于 axios 提交用户名和密码</li>
+</ol>
+</li>
+</ol>
+<h3 id="小结-10"><a href="#小结-10" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>总结下用户登录案例，本视频做的思路</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>1. 登录按钮-绑定点击事件
+2. 从页面输入框里，获取用户名和密码
+3. 判断长度是否符合要求
+4. 基于 axios 提交用户名和密码
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="12-案例-用户登录-提示信息"><a href="#12-案例-用户登录-提示信息" class="headerlink" title="12.案例-用户登录-提示信息"></a>12.案例-用户登录-提示信息</h2><h3 id="目标-11"><a href="#目标-11" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>根据准备好的提示标签和样式，给用户反馈提示</li>
+</ul>
+<h3 id="讲解-11"><a href="#讲解-11" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>先来到备课代码中，运行完成的页面，查看要完成的效果</p>
+</li>
+<li><p>使用提示框，反馈提示消息，因为有4处地方需要提示框，所以封装成函数</p>
+<ol>
+<li><p>获取提示框</p>
+</li>
+<li><p>封装提示框函数，重复调用，满足提示需求</p>
+<p>功能：</p>
+<ol>
+<li>显示提示框</li>
+<li>不同提示文字msg，和成功绿色失败红色isSuccess参数（true成功，false失败）</li>
+<li>过2秒后，让提示框自动消失</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>对应提示框核心代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 2.2 封装提示框函数，重复调用，满足提示需求</span></span><br><span class="line"><span class="comment">     * 功能：</span></span><br><span class="line"><span class="comment">     * 1. 显示提示框</span></span><br><span class="line"><span class="comment">     * 2. 不同提示文字msg，和成功绿色失败红色isSuccess（true成功，false失败）</span></span><br><span class="line"><span class="comment">     * 3. 过2秒后，让提示框自动消失</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">alertFn</span>(<span class="params">msg, isSuccess</span>) &#123;</span><br><span class="line">      <span class="comment">// 1&gt; 显示提示框</span></span><br><span class="line">      myAlert.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;show&#x27;</span>)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 2&gt; 实现细节</span></span><br><span class="line">      myAlert.<span class="property">innerText</span> = msg</span><br><span class="line">      <span class="keyword">const</span> bgStyle = isSuccess ? <span class="string">&#x27;alert-success&#x27;</span> : <span class="string">&#x27;alert-danger&#x27;</span></span><br><span class="line">      myAlert.<span class="property">classList</span>.<span class="title function_">add</span>(bgStyle)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 3&gt; 过2秒隐藏</span></span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        myAlert.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;show&#x27;</span>)</span><br><span class="line">        <span class="comment">// 提示：避免类名冲突，重置背景色</span></span><br><span class="line">        myAlert.<span class="property">classList</span>.<span class="title function_">remove</span>(bgStyle)</span><br><span class="line">      &#125;, <span class="number">2000</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="小结-11"><a href="#小结-11" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>我们什么时候需要封装函数？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>遇到相同逻辑，重复代码要复用的时候
+</li>
+</ul>
+</details></li>
+<li><p>如何封装一个函数呢？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>先明确要完成的需求，以及需要的参数，再来实现其中的细节，然后在需要的地方调用
+</li>
+</ul>
+</details></li>
+<li><p>我们的提示框是如何控制出现/隐藏的？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>添加或移除显示的类名即可
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="13-form-serialize-插件"><a href="#13-form-serialize-插件" class="headerlink" title="13.form-serialize 插件"></a>13.form-serialize 插件</h2><h3 id="目标-12"><a href="#目标-12" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>使用 form-serialize 插件，快速收集目标表单范围内表单元素的值</li>
+</ul>
+<h3 id="讲解-12"><a href="#讲解-12" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li><p>我们前面收集表单元素的值，是一个个标签获取的</p>
+</li>
+<li><p>如果一套表单里有很多很多表单元素，如何一次性快速收集出来呢？</p>
+</li>
+<li><p>使用 form-serialize 插件提供的 serialize 函数就可以办到</p>
+</li>
+<li><p>form-serialize 插件语法：</p>
+<ul>
+<li>引入 form-serialize 插件到自己网页中</li>
+<li>使用 serialize 函数<ul>
+<li>参数1：要获取的 form 表单标签对象（要求表单元素需要有 name 属性-用来作为收集的数据中属性名）</li>
+<li>参数2：配置对象<ul>
+<li>hash：<ul>
+<li>true - 收集出来的是一个 JS 对象结构</li>
+<li>false - 收集出来的是一个查询字符串格式</li>
+</ul>
+</li>
+<li>empty：<ul>
+<li>true - 收集空值</li>
+<li>false - 不收集空值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>需求：收集登录表单里用户名和密码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>form-serialize插件使用<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;example-form&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    目标：在点击提交时，使用form-serialize插件，快速收集表单元素值</span></span><br><span class="line"><span class="comment">    1. 把插件引入到自己网页中</span></span><br><span class="line"><span class="comment">  --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./lib/form-serialize.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">/**</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       * 2. 使用serialize函数，快速收集表单元素的值</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       * 参数1：要获取哪个表单的数据</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *  表单元素设置name属性，值会作为对象的属性名</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *  建议name属性的值，最好和接口文档参数名一致</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       * 参数2：配置对象</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *  hash 设置获取数据结构</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *    - true：JS对象（推荐）一般请求体里提交给服务器</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *    - false: 查询字符串</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *  empty 设置是否获取空值</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *    - true: 获取空值（推荐）数据结构和标签结构一致</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">       *    - false：不获取空值</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">      */</span></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.example-form&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">const</span> data = <span class="title function_">serialize</span>(form, &#123; <span class="attr">hash</span>: <span class="literal">true</span>, <span class="attr">empty</span>: <span class="literal">true</span> &#125;)</span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// const data = serialize(form, &#123; hash: false, empty: true &#125;)</span></span></span><br><span class="line"><span class="language-javascript">      <span class="comment">// const data = serialize(form, &#123; hash: true, empty: false &#125;)</span></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="小结-12"><a href="#小结-12" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>我们什么时候使用 form-serialize 插件？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>快速收集表单元素的值</li>
+</ul>
+</details></li>
+<li><p>如何使用 form-serialize 插件？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>1. 先引入插件到自己的网页中，2. 准备form和表单元素的name属性，3.使用serialize函数，传入form表单和配置对象
+</li>
+</ul>
+</details></li>
+<li><p>配置对象中 hash 和 empty 有什么用？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>hash 决定是收集为 JS 对象还是查询参数字符串，empty 决定是否收集空值
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="14-案例-用户登录-form-serialize"><a href="#14-案例-用户登录-form-serialize" class="headerlink" title="14.案例-用户登录-form-serialize"></a>14.案例-用户登录-form-serialize</h2><h3 id="目标-13"><a href="#目标-13" class="headerlink" title="目标"></a>目标</h3><ul>
+<li>尝试通过 form-serialize 重新修改用户登录案例-收集用户名和密码</li>
+</ul>
+<h3 id="讲解-13"><a href="#讲解-13" class="headerlink" title="讲解"></a>讲解</h3><ol>
+<li>基于模板代码，使用 form-serialize 插件来收集用户名和密码</li>
+<li>在原来的代码基础上修改即可</li>
+</ol>
+<h3 id="小结-13"><a href="#小结-13" class="headerlink" title="小结"></a>小结</h3><ol>
+<li><p>如何把一个第三方插件使用在已完成的案例中？</p>
+<details>
+<summary>答案</summary>
+<ul>
+<li>引入后，只需要使用在要修改的地方，修改一点就要确认测试一下
+</li>
+</ul>
+</details></li>
+</ol>
+<h2 id="今日重点-必须会"><a href="#今日重点-必须会" class="headerlink" title="今日重点(必须会)"></a>今日重点(必须会)</h2><ol>
+<li>axios 的配置项有哪几个，作用分别是什么？</li>
+<li>接口文档都包含哪些信息？</li>
+<li>在浏览器中如何查看查询参数/请求体，以及响应体数据？</li>
+<li>请求报文和响应报文由几个部分组成，每个部分的作用？</li>
+</ol>
+<h2 id="今日作业-必完成"><a href="#今日作业-必完成" class="headerlink" title="今日作业(必完成)"></a>今日作业(必完成)</h2><p>参考作业文件夹的md要求</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/101081?fr=aladdin">客户端-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8/213911?fr=aladdin">浏览器解释-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/100571?fr=aladdin">服务器解释-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E7%B3%BB%E7%BB%9F/5937042?fromtitle=URL&fromid=110640&fr=aladdin">url解释-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP?fromtitle=HTTP%E5%8D%8F%E8%AE%AE&fromid=1276942">http协议-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E6%9C%BA%E5%90%8D">主机名-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AB%AF%E5%8F%A3%E5%8F%B">端口号-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/tashuo/browse/content?id=11fca6ecdc2c066af4c5594f&lemmaId=8425&fromLemmaModule=pcBottom&lemmaTitle=ajax">Ajax解释-&gt;百度-懂啦</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/AJAX/Getting_Started">Ajax解释-&gt;MDN解释Ajax是与服务器通信而不只是请求</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/axios">axios-&gt;百度(可以点击播报听读音)</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/axios/axios">axios(github)地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://axios-http.com/">axios官方推荐官网</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/axios">axios(npmjs)地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/post/2171305">GET和POST区别-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8A%A5%E6%96%87/3164352">报文讲解-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660">HTTP状态码-&gt;百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8E%A5%E5%8F%A3/2886384">接口概念-&gt;百度百科</a></li>
+</ol>
+<h1 id="Day01-AJAX入门"><a href="#Day01-AJAX入门" class="headerlink" title="Day01_AJAX入门"></a>Day01_AJAX入门</h1><h2 id="客观题"><a href="#客观题" class="headerlink" title="客观题"></a>客观题</h2><ul>
+<li><p>参考客观题目录下的excel</p>
+</li>
+<li><p>在线直接答题：<a target="_blank" rel="noopener" href="https://ks.wjx.top/vm/OrYaZ1x.aspx#">https://ks.wjx.top/vm/OrYaZ1x.aspx#</a> </p>
+<blockquote>
+<p>ps：本测试链接来自问卷星，请不要轻信问卷星广告！</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="主观题"><a href="#主观题" class="headerlink" title="主观题"></a>主观题</h2><h3 id="作业1-微信聊天"><a href="#作业1-微信聊天" class="headerlink" title="作业1 - 微信聊天"></a>作业1 - 微信聊天</h3><p>目标：完成如下聊天效果</p>
+<p>要求：</p>
+<ol>
+<li>点击发送和敲击回车键，都能发送聊天消息</li>
+<li>把自己和对方消息都展示到页面上</li>
+<li>当聊天消息出现滚动条时，始终让最后一条消息出现在视口范围内</li>
+</ol>
+<p>接口文档：<a target="_blank" rel="noopener" href="https://www.apifox.cn/apidoc/project-1937884/api-49760222">https://www.apifox.cn/apidoc/project-1937884/api-49760222</a></p>
+<p>效果如下：配套标签和样式在文件夹内</p>
+<img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/homework_chat.gif" alt="homework_chat" style="zoom:33%;" />
+
+<h3 id="作业2-必要商城搜索"><a href="#作业2-必要商城搜索" class="headerlink" title="作业2 - 必要商城搜索"></a>作业2 - 必要商城搜索</h3><p>目标：完成如下搜索效果</p>
+<p>要求：</p>
+<ol>
+<li>输入要搜索的关键字，点击放大镜搜索匹配商品</li>
+</ol>
+<p>接口文档：<a target="_blank" rel="noopener" href="https://www.apifox.cn/apidoc/project-1937884/api-63538670">https://www.apifox.cn/apidoc/project-1937884/api-63538670</a></p>
+<p>效果如下：配套标签和样式在文件夹内</p>
+<img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/%E5%BF%85%E8%A6%81%E5%95%86%E5%9F%8E%E6%90%9C%E7%B4%A2.gif" alt="必要商城搜索" style="zoom:33%;" />
+
+<h2 id="排错题"><a href="#排错题" class="headerlink" title="排错题"></a>排错题</h2><p>配套文件夹内的《案例-登录》里面有 6 处错误，请帮帮这位同学实现登录效果吧</p>
+<h2 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h2><h3 id="1-GET-和-POST-请求方法的区别？"><a href="#1-GET-和-POST-请求方法的区别？" class="headerlink" title="1. GET 和 POST 请求方法的区别？"></a>1. GET 和 POST 请求方法的区别？</h3><ol>
+<li><p>GET和POST请求方式无区别, 本质都是一次HTTP请求(TCP链接), 而HTTP请求报文中都包含请求行, 请求头, 请求体，我们可以在相应位置携带值给服务器</p>
+</li>
+<li><p>图解: <img data-lazy-src="https://yjy-teach-oss.oss-cn-beijing.aliyuncs.com/hm8.1ajax/1665631819952-57c52b31-b574-4e25-8c2a-b3a989c2523e.png" alt="img" style="zoom: 80%;" /></p>
+</li>
+<li><p>但是<a target="_blank" rel="noopener" href="https://xhr.spec.whatwg.org/#the-send()-method">GET或HEAD请求方式, 浏览器会忽略请求体</a>, 但不代表GET/HEAD方式无法发送请求体, 使用apifox等接口调试工具是可以携带请求体的</p>
+</li>
+<li><p>非要说区别有如下几点</p>
+<ol>
+<li>浏览器回退的时候, GET不会重新提交, 而POST会重新提交表单</li>
+<li>GET会被浏览器主动缓存, POST不会</li>
+<li>再就是url上传查询参数和请求体传参的区别了(实际上不是GET和POST区别了)<ul>
+<li>url上只能进行url编码, 而请求体里支持多种编码格式</li>
+<li>url上的参数会保留在浏览器历史记录里, 而请求体不会被保留, 除非用代码设置</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="2-原生Ajax的原理"><a href="#2-原生Ajax的原理" class="headerlink" title="2. 原生Ajax的原理?"></a>2. 原生Ajax的原理?</h3><blockquote>
+<p>axios库是对原生Ajax的XMLHttpRequest相关语法的封装</p>
+<p>AJAX 原理是 XMLHttpRequest 相关语法</p>
+<p>而原生JS代码参考如下文档↓</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://lamphc.github.io/fe-up/#/JavaScript/ajax?id=%e9%9d%a2%e8%af%95%e5%ae%98%ef%bc%9aajax%e5%8e%9f%e7%90%86%e6%98%af%e4%bb%80%e4%b9%88%ef%bc%9f%e5%a6%82%e4%bd%95%e5%ae%9e%e7%8e%b0%ef%bc%9f">点我看答案</a></p>
+<h3 id="3-箭头函数和function函数区别"><a href="#3-箭头函数和function函数区别" class="headerlink" title="3. 箭头函数和function函数区别?"></a>3. 箭头函数和function函数区别?</h3><p>箭头函数常用做回调函数使用, 它无自己的this, 无arguments对象, 不能被new调用</p>
+<h3 id="4-一个页面从输入-URL-到页面加载显示完成，这个过程中都发生了什么"><a href="#4-一个页面从输入-URL-到页面加载显示完成，这个过程中都发生了什么" class="headerlink" title="4. 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么"></a>4. 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么</h3><ol>
+<li>浏览器查找域名对应的 IP 地址(DNS 查询：浏览器缓存-&gt;系统缓存-&gt;路由器缓存-&gt;ISPDNS 缓存-&gt;根域名服务器) </li>
+<li>浏览器向 Web 服务器发送一个 HTTP 请求（TCP 三次握手） </li>
+<li>（如果服务器设置了重定向）服务器 301 重定向（从 HTTP://example.com 重定向到 HTTP://<a target="_blank" rel="noopener" href="http://www.example.com)/">www.example.com）</a></li>
+<li>浏览器跟踪重定向地址，请求另一个带 www 的网址 </li>
+<li>服务器处理请求（通过路由读取资源） </li>
+<li>服务器返回一个 HTTP 响应（报头中把 Content-type 设置为 ‘text/html’）</li>
+<li>浏览器进 DOM 树构建</li>
+<li>浏览器发送请求获取嵌在 HTML 中的资源（如图片、音频、视频、CSS、JS 等）</li>
+<li>浏览器显示完成页面 </li>
+<li>浏览器发送异步请求</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/about/"><img class="post-copyright__author_img_front" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"></a><div class="post-copyright__author_name">XC's Blog</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">XC's Blog</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Ajax%E7%AC%94%E8%AE%B0/"><span class="tags-punctuation"></span>Ajax笔记<span class="tagsPageCount">6</span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/Ajax%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Ajax%E7%AC%AC%E4%BA%8C%E5%A4%A9"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Ajax第二天</div></div></a></div><div class="next-post pull-right"><a href="/WebAPI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/JS%E8%BF%9B%E9%98%B6%E5%A4%8D%E4%B9%A0"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JS进阶复习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="scoicon sco-star-smile-fill"></i><span>喜欢这篇的人也看了</span><div class="relatedPosts-link"><a onclick="event.preventDefault(); toRandomPost();" href="javascript:void(0);" rel="external nofollow" data-pjax-state="">随便逛逛</a></div></div><div class="relatedPosts-list"><div><a href="/Ajax%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E9%BB%91%E9%A9%AC%E5%A4%B4%E6%9D%A1%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0" title="黑马头条-数据管理平台"><img class="cover" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/ajax.webp" alt="cover"><div class="content is-center"><div class="title">黑马头条-数据管理平台</div></div></a></div><div><a href="/Ajax%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Promise%E7%AC%94%E8%AE%B0" title="ES6-Promise语法与原理"><img class="cover" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/promise.webp" alt="cover"><div class="content is-center"><div class="title">ES6-Promise语法与原理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div><div class="avatar-img-group"><img class="avatar-img" alt="头像" data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg"><div class="avatar-sticker"><img class="avatar-sticker-img" data-lazy-src="https://bu.dusays.com/2023/12/30/659011053e246.png" alt="心情贴纸"></div></div><div class="author-info__description_group"><div class="author-info__description">分享自己对编程的<b>热爱</b>，对美好生活的<b>向往</b>，对知识海洋<b>探索历程</b>。</div><div class="author-info__description2">相信你可以在这里找到对你有用的知识和教程。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/about/"><div class="author-info__name">XC's Blog</div><div class="author-info__desc"></div></a><div class="card-info-social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="scoicon sco-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ajax%E7%AC%AC%E4%B8%80%E5%A4%A9-%E2%80%93-ajax%E6%A6%82%E5%BF%B5-%E2%80%93-axios%E7%9A%84%E4%BD%BF%E7%94%A8-%E2%80%93-HTTP%E5%8D%8F%E8%AE%AE"><span class="toc-text">Ajax第一天 – ajax概念 – axios的使用 – HTTP协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E8%87%AA%E6%B5%8B"><span class="toc-text">知识点自测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%9B%AE%E6%A0%87"><span class="toc-text">学习目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#01-AJAX-%E6%A6%82%E5%BF%B5%E5%92%8C-axios-%E4%BD%BF%E7%94%A8"><span class="toc-text">01.AJAX 概念和 axios 使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#02-%E8%AE%A4%E8%AF%86-URL"><span class="toc-text">02.认识 URL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-1"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-1"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#03-URL-%E6%9F%A5%E8%AF%A2%E5%8F%82%E6%95%B0"><span class="toc-text">03.URL 查询参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-2"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-2"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-2"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#04-%E6%A1%88%E4%BE%8B-%E6%9F%A5%E8%AF%A2-%E5%9C%B0%E5%8C%BA%E5%88%97%E8%A1%A8"><span class="toc-text">04.案例-查询-地区列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-3"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-3"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-3"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#05-%E5%B8%B8%E7%94%A8%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8F%90%E4%BA%A4"><span class="toc-text">05.常用请求方法和数据提交</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-4"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-4"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-4"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#06-axios-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">06.axios 错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-5"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-5"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-5"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#07-HTTP-%E5%8D%8F%E8%AE%AE-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-text">07.HTTP 协议-请求报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-6"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-6"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-6"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#08-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87-%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5"><span class="toc-text">08.请求报文-错误排查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-7"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-7"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-7"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#09-HTTP-%E5%8D%8F%E8%AE%AE-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-text">09.HTTP 协议-响应报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-8"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-8"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-8"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3"><span class="toc-text">10.接口文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-9"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-9"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-9"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E6%A1%88%E4%BE%8B-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95-%E4%B8%BB%E8%A6%81%E4%B8%9A%E5%8A%A1"><span class="toc-text">11.案例-用户登录-主要业务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-10"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-10"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-10"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%A1%88%E4%BE%8B-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95-%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF"><span class="toc-text">12.案例-用户登录-提示信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-11"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-11"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-11"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-form-serialize-%E6%8F%92%E4%BB%B6"><span class="toc-text">13.form-serialize 插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-12"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-12"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-12"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-%E6%A1%88%E4%BE%8B-%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95-form-serialize"><span class="toc-text">14.案例-用户登录-form-serialize</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87-13"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B2%E8%A7%A3-13"><span class="toc-text">讲解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93-13"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E9%87%8D%E7%82%B9-%E5%BF%85%E9%A1%BB%E4%BC%9A"><span class="toc-text">今日重点(必须会)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E4%BD%9C%E4%B8%9A-%E5%BF%85%E5%AE%8C%E6%88%90"><span class="toc-text">今日作业(必完成)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Day01-AJAX%E5%85%A5%E9%97%A8"><span class="toc-text">Day01_AJAX入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E8%A7%82%E9%A2%98"><span class="toc-text">客观题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E8%A7%82%E9%A2%98"><span class="toc-text">主观题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A1-%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9"><span class="toc-text">作业1 - 微信聊天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A2-%E5%BF%85%E8%A6%81%E5%95%86%E5%9F%8E%E6%90%9C%E7%B4%A2"><span class="toc-text">作业2 - 必要商城搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E9%94%99%E9%A2%98"><span class="toc-text">排错题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-GET-%E5%92%8C-POST-%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">1. GET 和 POST 请求方法的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8E%9F%E7%94%9FAjax%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">2. 原生Ajax的原理?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8Cfunction%E5%87%BD%E6%95%B0%E5%8C%BA%E5%88%AB"><span class="toc-text">3. 箭头函数和function函数区别?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E4%BB%8E%E8%BE%93%E5%85%A5-URL-%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E6%98%BE%E7%A4%BA%E5%AE%8C%E6%88%90%EF%BC%8C%E8%BF%99%E4%B8%AA%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88"><span class="toc-text">4. 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="scoicon sco-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题"><img alt="整个前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98" title="整个前端面试题">整个前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题"><img alt="常见前端面试题" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98" title="常见前端面试题">常见前端面试题</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E9%9D%A2%E8%AF%95%E9%A2%98">面试题</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台"><img alt="硅谷甄选运营平台" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0" title="硅谷甄选运营平台">硅谷甄选运营平台</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/%E7%A1%85%E8%B0%B7%E7%94%84%E9%80%89%E9%A1%B9%E7%9B%AE%E7%AC%94%E8%AE%B0">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天"><img alt="Vue第三天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9" title="Vue第三天">Vue第三天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%B8%89%E5%A4%A9">Vue框架笔记</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天"><img alt="Vue第二天" data-lazy-src="https://cdn1.tianli0.top/gh/web-xc/iMG/postss/vue.png"></a><div class="content"><a class="title" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9" title="Vue第二天">Vue第二天</a><a class="article-recent_post_categories" href="/Vue%E7%AC%94%E8%AE%B0/vue%E7%AC%AC%E4%BA%8C%E5%A4%A9">Vue框架笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="sco-footer-bar"><div class="footer-logo"><span class="scoicon">XC's Blog</span></div><div class="footer-bar-description">来自XC's Blog - 的文章</div><a class="footer-bar-link" href="/">了解更多</a></div><div id="footer_deal"><div class="footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img data-lazy-src="https://npm.elemecdn.com/webxc@1.0.0/logo/logo.jpg" alt="返回顶部"></div></div><div id="sco-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2021 - 2024 By&nbsp;<a class="footer-bar-link" href="/">XC's Blog</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/wleelw/hexo-theme-solitude" title="主题">主题</a><a class="footer-bar-link cc"><i class="scoicon sco-copyright-line"></i><i class="scoicon sco-creative-commons-by-line"></i><i class="scoicon sco-creative-commons-nc-line"></i><i class="scoicon sco-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- inject body--><div><script src="/js/main.js?v=1.5.1"></script><script src="/js/utils.js?v=1.5.1"></script><script src="https://cdn.cbd.int/solitude-source/js/universe.min.js"></script><script>dark()
+</script><script src="https://cdn.staticfile.org/pjax/0.2.8/pjax.min.js"></script><script src="https://cdn.staticfile.org/vanilla-lazyload/17.8.5/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/node-snackbar/0.1.16/snackbar.min.js"></script><script src="/js/sco-ai.min.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js"></script><script src="https://cdn.staticfile.org/meting/2.0.1/Meting.min.js"></script><script>const meting_api = 'https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r';
+</script><script src="/js/covercolor/local.js?v=1.5.1"></script><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script></div><div id="js-pjax"><script async src="https://cdn.staticfile.org/busuanzi/2.3.0/bsz.pure.mini.min.js"></script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: 'post',
+    toc: true,
+    comment: false,
+}
+</script></div><!-- newest comment--><!-- pjax--><script>let pjaxSelectors = [
+    'title',
+    '#body-wrap',
+    '#site-config',
+    'meta[name="description"]',
+    '#js-pjax',
+    'meta[property^="og:"]',
+]
+
+const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'light');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+}
+initTheme()</script><!-- search--><!-- music--><div class="needEndHide" id="nav-music" onclick="sco.musicToggle()"><div id="nav-music-hoverTips">音乐已暂停</div><meting-js id="8407304077" server="netease" type="playlist" mutex="true" preload="none" data-lrctype="0" order="random" theme="var(--sco-main)"></meting-js></div></body></html><script>const posts=["Vue笔记/前端面试题","Vue笔记/面试题","Vue笔记/硅谷甄选项目笔记","Vue笔记/vue第三天","Vue笔记/vue第二天","Vue笔记/Vue第一天","Vue笔记/vue框架笔记","Vue前置基础/5.ES6模块化与Webpack入门","Vue前置基础/1.Vue前置JS功底","Vue前置基础/4.跨域的基本概念","Vue前置基础/3.NPM的使用","Vue前置基础/2.Nodejs基础","Ajax学习笔记/黑马头条数据管理平台","Ajax学习笔记/Promise笔记","Ajax学习笔记/Ajax第四天","Ajax学习笔记/Ajax第三天","Ajax学习笔记/Ajax第二天","Ajax学习笔记/Ajax第一天","WebAPI学习笔记/JS进阶复习","WebAPI学习笔记/JS进阶第四天","WebAPI学习笔记/JS进阶第三天","WebAPI学习笔记/JS进阶第二天","WebAPI学习笔记/JS进阶第一天","WebAPI学习笔记/WebAPIs第七天","WebAPI学习笔记/WebAPIs第六天","WebAPI学习笔记/WebAPIs第五天","WebAPI学习笔记/WebAPIs第四天","WebAPI学习笔记/WebAPIs第三天","WebAPI学习笔记/WebAPIs第二天","WebAPI学习笔记/WebAPIs第一天","WebAPI学习笔记/WebAPIs学习笔记","WebAPI学习笔记/JS-ES6模块化","WebAPI学习笔记/JavaScript进阶","JavaScript学习笔记/JavaScript第五天","JavaScript学习笔记/JavaScript第四天","JavaScript学习笔记/JavaScript第三天","JavaScript学习笔记/JavaScript第二天","JavaScript学习笔记/JavaScript第一天","基础学习路线/移动开发-响应式布局","基础学习路线/移动开发-rem布局","基础学习路线/移动开发-flex布局","基础学习路线/移动开发-流式布局","基础学习路线/CSS3转换问题","基础学习路线/CSS-2D-3D转换","基础学习路线/前端168个单词","基础学习路线/CSS高级技巧","前端技术栈/前端路线","Hexo/图床方案汇总","其他技术栈/Windows软件推荐","Hexo/Butterfly主题配置","Hexo/Qexo","JavaScript/This指向与改变This指向","JavaScript/JS防抖与节流","JavaScript/如何在1分钟内完美解释什么是 JSONP 请求？","前端技术栈/移动端最佳适配解决方案","GitHub/Git常用命令","前端技术栈/来自2.5年前端小白的总结","网站资源/如何买到合适的域名","其他技术栈/CentOS一键安装Docker","网站资源/阿里云资源合集","其他技术栈/15个前端必备学习网站","其他技术栈/CSS3（圆角边框、阴影、浮动详解及示例）","网络协议/浅谈 HTTP 和 HTTPS","学习笔记/CSS属性大全","基础学习路线/CSS第五天-定位","基础学习路线/CSS第四天-浮动","基础学习路线/CSS第三天","基础学习路线/CSS第二天","基础学习路线/CSS第一天","基础学习路线/HTML第二天","基础学习路线/HTML第一天","学习笔记/「学习笔记」JavaScript基础","学习笔记/HTML与CSS进阶","Vue笔记/Vue X-数组对象的双向数据绑定","学习笔记/「学习笔记」CSS基础","学习笔记/「学习笔记」HTML基础","学习笔记/HTML基础","Windows/PE-Win10教程","Windows/Win系统网站-KMS","安卓玩机/Magisk卡刷-通刷官方-了解Fastboot","其他技术栈/前端开发免费资源大汇总","GitHub/Git基础-Github自定义域名","学习笔记/CSS笔记","Vscode/Vscode笔记-24款插件","其他技术栈/免费常用的前端CDN库","其他技术栈/软件及网站推荐","Vscode/记录 Vscode 插件","Hexo/Hexo音乐排行-Netlify CMS","GitHub/玩转GitHub","jQuery/jQuery自动触发事件与bootstrapjQuery插件用法","Hexo/使用Hexo和Github搭建个人博客","Hexo/Hexo博客搭建指南","Hexo/Hexo相关","Markdown/Markdown基础--高级教程","Markdown/Markdown基础教程"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); };</script>
